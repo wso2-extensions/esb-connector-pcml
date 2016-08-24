@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~
+ ~  WSO2 Inc. licenses this file to you under the Apache License,
+ ~  Version 2.0 (the "License"); you may not use this file except
+ ~  in compliance with the License.
+ ~  You may obtain a copy of the License at
+ ~
+ ~    http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~  Unless required by applicable law or agreed to in writing,
+ ~  software distributed under the License is distributed on an
+ ~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ ~  KIND, either express or implied.  See the License for the
+ ~  specific language governing permissions and limitations
+ ~  under the License.
+-->
+
+<template name="trace" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="conversion" description="Enables/Disables conversion trace logs."/>
+    <parameter name="datastream" description="Enables/Disables datastream trace logs."/>
+    <parameter name="diagnostics" description="Enables/Disables diagnostics trace logs."/>
+    <parameter name="error" description="Enables/Disables error trace logs."/>
+    <parameter name="information" description="Enables/Disables information trace logs."/>
+    <parameter name="pcml" description="Enables/Disables pcml trace logs."/>
+    <parameter name="warning" description="Enables/Disables warning trace logs."/>
+    <parameter name="proxy" description="Enables/Disables proxy trace logs."/>
+    <parameter name="all" description="Enables/Disables all trace logs."/>
+    <sequence>
+        <class name="org.wso2.carbon.connector.pcml.AS400Trace"/>
+    </sequence>
+</template>

@@ -1,0 +1,7 @@
+<pcml version="4.0">
+  <program name="Addition" path="/QSYS.LIB/%LIBL%.LIB/ADDITION.PGM">
+     <data name="inputValue1" type="int" length="4" usage="input" />
+     <data name="inputValue2" type="int" length="4" usage="input" />
+     <data name="outputValue" type="int" length="4" usage="output" />
+  </program>
+</pcml>
