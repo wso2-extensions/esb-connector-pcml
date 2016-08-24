@@ -1,12 +1,37 @@
-*.class
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Ignore everything in this directory
+target
+.classpath
+.settings
+.project
+*.iml
+*.iws
+*.ipr
+.idea
+*.class
+*.classpath
+*.settings
+*.project
+.DS_Store
+
 
 # Package Files #
 *.jar
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+
+# ignore logs
+*.log
+
+# ignore target directories
+target/
+*.*~
+
+# ignoring esb pack
+repository/wso2esb-4.9.0.zip
