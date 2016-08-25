@@ -1,0 +1,6 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="wso2.connector.pcml">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <urn:method>traceDatastreamAndWarning</urn:method>
+    </soapenv:Body>
+</soapenv:Envelope>
