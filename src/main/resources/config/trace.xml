@@ -25,6 +25,7 @@
     <parameter name="information" description="Enables/Disables information trace logs."/>
     <parameter name="pcml" description="Enables/Disables pcml trace logs."/>
     <parameter name="warning" description="Enables/Disables warning trace logs."/>
+    <parameter name="proxy" description="Enables/Disables proxy trace logs."/>
     <parameter name="all" description="Enables/Disables all trace logs."/>
     <sequence>
         <class name="org.wso2.carbon.connector.pcml.AS400Trace"/>

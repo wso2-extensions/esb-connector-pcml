@@ -156,6 +156,11 @@ public class AS400CallProgram extends AbstractConnector {
             log.error(extendedIllegalArgumentException);
             AS400Utils.handleException(extendedIllegalArgumentException, "305", messageContext);
             throw new SynapseException(extendedIllegalArgumentException);
+        } catch (Exception exception) {
+            // Error occurred while calling the AS400 program
+            log.error(exception);
+            AS400Utils.handleException(exception, "399", messageContext);
+            throw new SynapseException(exception);
         } finally {
             if (null != as400 && as400.isConnected()) {
                 log.auditLog("Disconnecting from all AS400 services.");

@@ -49,6 +49,7 @@ public class AS400Initialize extends AbstractConnector {
         String systemName = "";
         String userID = "";
         String password = "";
+        String proxy = "";
         try {
             Axis2MessageContext axis2smc = (Axis2MessageContext) messageContext;
 
@@ -58,7 +59,8 @@ public class AS400Initialize extends AbstractConnector {
                 systemName = (String)systemNameParameter;
             }
 
-            Object userIDParameter = getParameter(messageContext, AS400Constants.AS400_INIT_USER_ID);
+            Object userIDParameter = axis2smc.getAxis2MessageContext().getOperationContext().getProperty(
+                                                                                    AS400Constants.AS400_INIT_USER_ID);
             if (null != userIDParameter) {
                 userID = (String) userIDParameter;
             }
@@ -69,10 +71,15 @@ public class AS400Initialize extends AbstractConnector {
                 password = (String) passwordProperty;
             }
 
+            Object proxyParameter = getParameter(messageContext, AS400Constants.AS400_INIT_PROXY_PROPERTY);
+            if (null != proxyParameter) {
+                proxy = (String) proxyParameter;
+            }
+
             log.auditLog("Creating an AS400 Instance.");
 
             // Initializing as400 instance.
-            as400 = new AS400(systemName, userID, password);
+            as400 = new AS400(systemName, userID, password, proxy);
 
             // Disabling GUI feature.
             as400.setGuiAvailable(false);
@@ -105,6 +112,11 @@ public class AS400Initialize extends AbstractConnector {
             log.error(guiDisableException);
             AS400Utils.handleException(guiDisableException, "202", messageContext);
             throw new SynapseException(guiDisableException);
+        } catch(Exception exception) {
+            // Exception occurred while initializing the AS400 instance
+            log.error(exception);
+            AS400Utils.handleException(exception, "299", messageContext);
+            throw new SynapseException(exception);
         } finally {
             // Adding the as400 object to message context.
             messageContext.setProperty(AS400Constants.AS400_INSTANCE, as400);

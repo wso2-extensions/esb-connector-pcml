@@ -85,6 +85,11 @@ public class AS400Trace extends AbstractConnector {
                 Trace.setTraceWarningOn(Boolean.parseBoolean((String) warningLevel));
             }
 
+            Object proxyLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_PROXY);
+            if (null != proxyLevel) {
+                Trace.setTraceProxyOn(Boolean.parseBoolean((String) proxyLevel));
+            }
+
             Object allLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_ALL);
             if (null != allLevel) {
                 Trace.setTraceConversionOn(Boolean.parseBoolean((String)allLevel));
@@ -94,6 +99,7 @@ public class AS400Trace extends AbstractConnector {
                 Trace.setTraceInformationOn(Boolean.parseBoolean((String)allLevel));
                 Trace.setTracePCMLOn(Boolean.parseBoolean((String)allLevel));
                 Trace.setTraceWarningOn(Boolean.parseBoolean((String)allLevel));
+                Trace.setTraceProxyOn(Boolean.parseBoolean((String) allLevel));
             }
 
             // Logging for debugging.
@@ -114,7 +120,7 @@ public class AS400Trace extends AbstractConnector {
         } catch (Exception exception) {
             // Error occurred when setting trace properties.
             log.error(exception);
-            AS400Utils.handleException(exception, "401", messageContext);
+            AS400Utils.handleException(exception, "499", messageContext);
             throw new SynapseException(exception);
         }
     }
