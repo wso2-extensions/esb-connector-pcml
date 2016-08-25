@@ -175,14 +175,14 @@
                                     <overWrite>true</overWrite>
                                     <outputDirectory>target/connector/dependencies</outputDirectory>
                                 </artifactItem>
-                                <artifactItem>
-                                    <groupId>net.sf.jt400</groupId>
-                                    <artifactId>jt400</artifactId>
-                                    <version>${jt400.version}</version>
-                                    <type>jar</type>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>target/connector/dependencies</outputDirectory>
-                                </artifactItem>
+                                <!--<artifactItem>-->
+                                    <!--<groupId>net.sf.jt400</groupId>-->
+                                    <!--<artifactId>jt400</artifactId>-->
+                                    <!--<version>${jt400.version}</version>-->
+                                    <!--<type>jar</type>-->
+                                    <!--<overWrite>true</overWrite>-->
+                                    <!--<outputDirectory>target/connector/dependencies</outputDirectory>-->
+                                <!--</artifactItem>-->
                             </artifactItems>
                         </configuration>
                     </execution>
