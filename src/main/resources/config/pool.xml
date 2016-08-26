@@ -16,13 +16,17 @@
    specific language governing permissions and limitations
    under the License.
 -->
-<template name="init" onError="fault" xmlns="http://ws.apache.org/ns/synapse">
-    <parameter name="systemName"/>
-    <parameter name="userID"/>
-    <parameter name="password"/>
-    <parameter name="proxy"/>
-    <parameter name="pool"/>
+<template name="pool" onError="fault" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="poolName"/>
+    <parameter name="maxConnections"/>
+    <parameter name="maxInactivity"/>
+    <parameter name="maxLifetime"/>
+    <parameter name="maxUseCount"/>
+    <parameter name="maxUseTime"/>
+    <parameter name="runMaintenance"/>
+    <parameter name="threadUsed"/>
+    <parameter name="cleanupInterval"/>
     <sequence>
-        <class name="org.wso2.carbon.connector.pcml.AS400Initialize"/>
+        <class name="org.wso2.carbon.connector.pcml.AS400Pool"/>
     </sequence>
 </template>

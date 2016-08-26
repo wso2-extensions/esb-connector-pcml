@@ -131,11 +131,11 @@ public class AS400CallProgram extends AbstractConnector {
             log.error(pcmlException);
             AS400Utils.handleException(pcmlException, "300", messageContext);
             throw new SynapseException(pcmlException);
-        } catch (AS400PCMLConnectorException pcmlException) {
+        } catch (AS400PCMLConnectorException connectorException) {
             // Error occurred while processing message context. May occur due to invalid data.
-            log.error(pcmlException);
-            AS400Utils.handleException(pcmlException, "301", messageContext);
-            throw new SynapseException(pcmlException);
+            log.error(connectorException);
+            AS400Utils.handleException(connectorException, "301", messageContext);
+            throw new SynapseException(connectorException);
         } catch (XmlException xmlException) {
             // Error occurred while processing the output payload
             log.error(xmlException);

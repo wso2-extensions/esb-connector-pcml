@@ -34,5 +34,13 @@
             <file>trace.xml</file>
             <description>Modify trace log levels.</description>
         </component>
+        <component name="pool">
+            <file>pool.xml</file>
+            <description>Creates AS400 connection pool.</description>
+        </component>
+        <component name="poolReturn">
+            <file>poolReturn.xml</file>
+            <description>Returns the AS400 connection to the connection pool.</description>
+        </component>
     </subComponents>
 </component>

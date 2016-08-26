@@ -29,11 +29,13 @@ public class AS400Constants {
     // Properties stored in the message context.
     public static final String AS400_INSTANCE = "as400Instance";
     public static final String AS400_SOCKET_PROPERTIES = "as400SocketProperties";
+    public static final String AS400_CONNECTION_POOL_MAP = "as400ConnectionPoolMap";
     // Parameters of the initializing mediator.
     public static final String AS400_INIT_SYSTEM_NAME = "systemName";
     public static final String AS400_INIT_USER_ID = "userID";
     public static final String AS400_INIT_PASSWORD = "password";
     public static final String AS400_INIT_PROXY = "proxy";
+    public static final String AS400_INIT_POOL_NAME = "pool";
     // Parameters of the call program mediator.
     public static final String AS400_PCML_FILE_NAME = "pcmlFileName";
     public static final String AS400_PCML_PROGRAM_NAME = "programName";
@@ -60,6 +62,16 @@ public class AS400Constants {
     public static final String AS400_TRACE_WARNING = "warning";
     public static final String AS400_TRACE_PROXY = "proxy";
     public static final String AS400_TRACE_ALL = "all";
+    // Parameters for AS400 connection pool.
+    public static final String AS400_CONNECTION_POOL_NAME = "poolName";
+    public static final String AS400_CONNECTION_POOL_MAX_CONNECTIONS = "maxConnections";
+    public static final String AS400_CONNECTION_POOL_MAX_INACTIVITY = "maxInactivity";
+    public static final String AS400_CONNECTION_POOL_MAX_LIFETIME = "maxLifetime";
+    public static final String AS400_CONNECTION_POOL_MAX_USE_COUNT = "maxUseCount";
+    public static final String AS400_CONNECTION_POOL_MAX_USE_TIME = "maxUseTime";
+    public static final String AS400_CONNECTION_POOL_RUN_MAINTENANCE = "runMaintenance";
+    public static final String AS400_CONNECTION_POOL_THREAD_USED = "threadUsed";
+    public static final String AS400_CONNECTION_POOL_CLEANUP_INTERVAL = "cleanupInterval";
     // Default log file path.
     public static final String AS400_DEFAULT_LOG_PATH = CarbonUtils.getCarbonLogsPath() + File.separator +
                                                                                             "pcml-connector-logs.log";

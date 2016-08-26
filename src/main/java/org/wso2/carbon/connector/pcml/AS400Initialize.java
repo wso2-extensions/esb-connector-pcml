@@ -18,6 +18,7 @@
 package org.wso2.carbon.connector.pcml;
 
 import com.ibm.as400.access.AS400;
+import com.ibm.as400.access.AS400ConnectionPool;
 import com.ibm.as400.access.AS400SecurityException;
 import com.ibm.as400.access.SocketProperties;
 import org.apache.synapse.MessageContext;
@@ -28,6 +29,7 @@ import org.wso2.carbon.connector.core.ConnectException;
 
 import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Creates AS400 instance for PCML connector. Authenticates if user ID and password are provided.
@@ -71,10 +73,27 @@ public class AS400Initialize extends AbstractConnector {
                 proxy = (String) proxyParameter;
             }
 
-            log.auditLog("Creating an AS400 Instance.");
+            // If connection pool exist.
+            Object connectionPoolMapProperty = messageContext.getProperty(AS400Constants.AS400_CONNECTION_POOL_MAP);
+            Object poolNameParameter = getParameter(messageContext, AS400Constants.AS400_INIT_POOL_NAME);
+            if (null != poolNameParameter && null != connectionPoolMapProperty) {
+                Map<String, AS400ConnectionPool> connectionPoolMap =
+                                                        (Map<String, AS400ConnectionPool>) connectionPoolMapProperty;
+                String poolName = (String) poolNameParameter;
+                AS400ConnectionPool as400ConnectionPool = connectionPoolMap.get(poolName);
+                if (null != as400ConnectionPool) {
+                    log.auditLog("Getting an AS400 connection from pool name : " + poolName);
+                    as400 = as400ConnectionPool.getConnection(systemName, userID, password);
+                } else {
+                    throw new AS400PCMLConnectorException("Unable to find an AS400 connection pool mapped to name  '" +
+                                                                                                    poolName + "'.");
+                }
+            } else {
+                log.auditLog("Creating an AS400 Instance.");
 
-            // Initializing as400 instance.
-            as400 = new AS400(systemName, userID, password, proxy);
+                // Initializing as400 instance.
+                as400 = new AS400(systemName, userID, password, proxy);
+            }
 
             // Disabling GUI feature.
             as400.setGuiAvailable(false);
