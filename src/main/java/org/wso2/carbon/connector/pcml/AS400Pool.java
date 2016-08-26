@@ -122,6 +122,22 @@ public class AS400Pool extends AbstractConnector {
                         as400ConnectionPool.setCleanupInterval(Long.parseLong(cleanupInterval));
                     }
 
+                    // Logging for debugging.
+                    if (log.isTraceOrDebugEnabled()) {
+                        log.traceOrDebug("Connection Pool - Max Connections : " +
+                                                                            as400ConnectionPool.getMaxConnections());
+                        log.traceOrDebug("Connection Pool - Max Inactivity : " +
+                                                                                as400ConnectionPool.getMaxInactivity());
+                        log.traceOrDebug("Connection Pool - Max Lifetime : " + as400ConnectionPool.getMaxLifetime());
+                        log.traceOrDebug("Connection Pool - Max Use Count : " + as400ConnectionPool.getMaxUseCount());
+                        log.traceOrDebug("Connection Pool - Max Use Time : " + as400ConnectionPool.getMaxUseTime());
+                        log.traceOrDebug("Connection Pool - Run Maintenance : " +
+                                                                                as400ConnectionPool.isRunMaintenance());
+                        log.traceOrDebug("Connection Pool - Thread Used : " + as400ConnectionPool.isThreadUsed());
+                        log.traceOrDebug("Connection Pool - Cleanup Interval : " +
+                                                                            as400ConnectionPool.getCleanupInterval());
+                    }
+                    
                     // Adding the created pool to the static pool map.
                     log.auditLog("Creating AS400 connection pool with name '" + poolName + "'.");
                     as400ConnectionPoolMap.put(poolName, as400ConnectionPool);
