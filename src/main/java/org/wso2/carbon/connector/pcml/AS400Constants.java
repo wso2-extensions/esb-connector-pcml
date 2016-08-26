@@ -31,9 +31,9 @@ public class AS400Constants {
     public static final String AS400_SOCKET_PROPERTIES = "as400SocketProperties";
     // Parameters of the initializing mediator.
     public static final String AS400_INIT_SYSTEM_NAME = "systemName";
-    public static final String AS400_INIT_USER_ID = "as400.userID";
-    public static final String AS400_INIT_PASSWORD_PROPERTY = "as400.password";
-    public static final String AS400_INIT_PROXY_PROPERTY = "proxy";
+    public static final String AS400_INIT_USER_ID = "userID";
+    public static final String AS400_INIT_PASSWORD = "password";
+    public static final String AS400_INIT_PROXY = "proxy";
     // Parameters of the call program mediator.
     public static final String AS400_PCML_FILE_NAME = "pcmlFileName";
     public static final String AS400_PCML_PROGRAM_NAME = "programName";
@@ -50,7 +50,7 @@ public class AS400Constants {
     public static final String AS400_SOCKET_PROPERTY_SOCKET_LINGER = "soLinger";
     public static final String AS400_SOCKET_PROPERTY_SOCKET_TIMEOUT = "soTimeout";
     public static final String AS400_SOCKET_PROPERTY_TCP_NO_DELAY = "tcpNoDelay";
-    // Parameters for AS400 tracing
+    // Parameters for AS400 tracing.
     public static final String AS400_TRACE_CONVERSION = "conversion";
     public static final String AS400_TRACE_DATASTREAM = "datastream";
     public static final String AS400_TRACE_DIAGNOSTICS = "diagnostics";
@@ -60,7 +60,7 @@ public class AS400Constants {
     public static final String AS400_TRACE_WARNING = "warning";
     public static final String AS400_TRACE_PROXY = "proxy";
     public static final String AS400_TRACE_ALL = "all";
-    // Default log file path
+    // Default log file path.
     public static final String AS400_DEFAULT_LOG_PATH = CarbonUtils.getCarbonLogsPath() + File.separator +
                                                                                             "pcml-connector-logs.log";
 }

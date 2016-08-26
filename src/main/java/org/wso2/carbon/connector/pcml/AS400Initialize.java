@@ -23,7 +23,6 @@ import com.ibm.as400.access.SocketProperties;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseException;
 import org.apache.synapse.SynapseLog;
-import org.apache.synapse.core.axis2.Axis2MessageContext;
 import org.wso2.carbon.connector.core.AbstractConnector;
 import org.wso2.carbon.connector.core.ConnectException;
 
@@ -51,27 +50,23 @@ public class AS400Initialize extends AbstractConnector {
         String password = "";
         String proxy = "";
         try {
-            Axis2MessageContext axis2smc = (Axis2MessageContext) messageContext;
-
             // Get properties that are required for logging in.
             Object systemNameParameter = getParameter(messageContext, AS400Constants.AS400_INIT_SYSTEM_NAME);
             if (null != systemNameParameter) {
                 systemName = (String)systemNameParameter;
             }
 
-            Object userIDParameter = axis2smc.getAxis2MessageContext().getOperationContext().getProperty(
-                                                                                    AS400Constants.AS400_INIT_USER_ID);
+            Object userIDParameter = getParameter(messageContext, AS400Constants.AS400_INIT_USER_ID);
             if (null != userIDParameter) {
                 userID = (String) userIDParameter;
             }
 
-            Object passwordProperty = axis2smc.getAxis2MessageContext().getOperationContext().getProperty(
-                                                                        AS400Constants.AS400_INIT_PASSWORD_PROPERTY);
+            Object passwordProperty = getParameter(messageContext, AS400Constants.AS400_INIT_PASSWORD);
             if (null != passwordProperty) {
                 password = (String) passwordProperty;
             }
 
-            Object proxyParameter = getParameter(messageContext, AS400Constants.AS400_INIT_PROXY_PROPERTY);
+            Object proxyParameter = getParameter(messageContext, AS400Constants.AS400_INIT_PROXY);
             if (null != proxyParameter) {
                 proxy = (String) proxyParameter;
             }
