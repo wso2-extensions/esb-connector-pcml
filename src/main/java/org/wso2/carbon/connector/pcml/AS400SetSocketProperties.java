@@ -103,7 +103,7 @@ public class AS400SetSocketProperties extends AbstractConnector {
             }
         } catch (Exception exception) {
             // Error occurred when setting socket properties
-            this.log.error(exception);
+            log.error(exception);
             AS400Utils.handleException(exception, "199", messageContext);
             throw new SynapseException(exception);
         } finally {

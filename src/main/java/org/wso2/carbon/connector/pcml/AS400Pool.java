@@ -28,7 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The following is class is invoked when creating an AS400 connection pool. A connection pool will be created in
+ * The following is class is invoked when creating an AS400 connection pool. A connection pool will be created and
+ * stored in memory if it is not already created. Each pool is mapped against a pool name.
  */
 public class AS400Pool extends AbstractConnector {
     /**
