@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<component name="config" type="synapse/template">
+    <subComponents>
+        <component name="socket">
+            <file>socket.xml</file>
+            <description>Creates socket properties instance for a AS400 instance.</description>
+        </component>
+        <component name="init">
+            <file>init.xml</file>
+            <description>Initializes AS400 instance. Authenticates if credentials are provided.</description>
+        </component>
+        <component name="call">
+            <file>call.xml</file>
+            <description>Calls a program in the AS400 system.</description>
+        </component>
+        <component name="trace">
+            <file>trace.xml</file>
+            <description>Modify trace log levels.</description>
+        </component>
+        <component name="pool">
+            <file>pool.xml</file>
+            <description>Creates AS400 connection pool.</description>
+        </component>
+        <component name="poolReturn">
+            <file>poolReturn.xml</file>
+            <description>Returns the AS400 connection to the connection pool.</description>
+        </component>
+    </subComponents>
+</component>
