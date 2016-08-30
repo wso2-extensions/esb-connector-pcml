@@ -97,9 +97,7 @@ public class AS400Utils {
         }
 
         if (log.isTraceOrDebugEnabled()) {
-            if (log.isTraceOrDebugEnabled()) {
-                log.traceOrDebug("Input parameters found: " + inputParameters);
-            }
+            log.traceOrDebug("Input parameters found: " + inputParameters);
         }
 
         return inputParameters;

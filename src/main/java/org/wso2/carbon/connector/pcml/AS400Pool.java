@@ -125,18 +125,7 @@ public class AS400Pool extends AbstractConnector {
 
                     // Logging for debugging.
                     if (log.isTraceOrDebugEnabled()) {
-                        log.traceOrDebug("Connection Pool - Max Connections : " +
-                                                                            as400ConnectionPool.getMaxConnections());
-                        log.traceOrDebug("Connection Pool - Max Inactivity : " +
-                                                                                as400ConnectionPool.getMaxInactivity());
-                        log.traceOrDebug("Connection Pool - Max Lifetime : " + as400ConnectionPool.getMaxLifetime());
-                        log.traceOrDebug("Connection Pool - Max Use Count : " + as400ConnectionPool.getMaxUseCount());
-                        log.traceOrDebug("Connection Pool - Max Use Time : " + as400ConnectionPool.getMaxUseTime());
-                        log.traceOrDebug("Connection Pool - Run Maintenance : " +
-                                                                                as400ConnectionPool.isRunMaintenance());
-                        log.traceOrDebug("Connection Pool - Thread Used : " + as400ConnectionPool.isThreadUsed());
-                        log.traceOrDebug("Connection Pool - Cleanup Interval : " +
-                                                                            as400ConnectionPool.getCleanupInterval());
+                        debugLogPoolProperties(poolName, as400ConnectionPool, log);
                     }
                     
                     // Adding the created pool to the static pool map.
@@ -146,6 +135,11 @@ public class AS400Pool extends AbstractConnector {
                     // A pool already exists with the given pool name. Hence pool creation is ignored.
                     log.auditLog("AS400 Connection pool already exists with name '" + poolName + "'. Hence ignoring " +
                                                                                                     "pool creation.");
+
+                    // Logging for debugging.
+                    if (log.isTraceOrDebugEnabled()) {
+                        debugLogPoolProperties(poolName, as400ConnectionPoolMap.get(poolName), log);
+                    }
                 }
             } else {
                 // Throwing an error when pool name does not exists.
@@ -161,12 +155,30 @@ public class AS400Pool extends AbstractConnector {
             AS400Utils.handleException(exception, "599", messageContext);
         } finally {
             if (null != as400ConnectionPoolMap) {
-                if (log.isTraceOrDebugEnabled()) {
-                    log.auditDebug("AS400 connection pool map : " + as400ConnectionPoolMap);
-                }
                 // Setting the static connection pool map to the message context so that it can be used by init synapse.
                 messageContext.setProperty(AS400Constants.AS400_CONNECTION_POOL_MAP, as400ConnectionPoolMap);
             }
+        }
+    }
+
+    /**
+     * Logging properties of a {@link AS400ConnectionPool} as debug logs.
+     *
+     * @param poolName The name of the pool in which its stored against in {@link #as400ConnectionPoolMap}.
+     * @param pool     The AS400 connection pool.
+     * @param log      The logger for logging.
+     */
+    private void debugLogPoolProperties(String poolName, AS400ConnectionPool pool, SynapseLog log) {
+        // Logging for debugging.
+        if (log.isTraceOrDebugEnabled()) {
+            log.traceOrDebug("Connection Pool - " + poolName + " - Max Connections : " + pool.getMaxConnections());
+            log.traceOrDebug("Connection Pool - " + poolName + " - Max Inactivity : " + pool.getMaxInactivity());
+            log.traceOrDebug("Connection Pool - " + poolName + " - Max Lifetime : " + pool.getMaxLifetime());
+            log.traceOrDebug("Connection Pool - " + poolName + " - Max Use Count : " + pool.getMaxUseCount());
+            log.traceOrDebug("Connection Pool - " + poolName + " - Max Use Time : " + pool.getMaxUseTime());
+            log.traceOrDebug("Connection Pool - " + poolName + " - Run Maintenance : " + pool.isRunMaintenance());
+            log.traceOrDebug("Connection Pool - " + poolName + " - Thread Used : " + pool.isThreadUsed());
+            log.traceOrDebug("Connection Pool - " + poolName + " - Cleanup Interval : " + pool.getCleanupInterval());
         }
     }
 }

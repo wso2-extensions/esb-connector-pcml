@@ -84,6 +84,12 @@ public class AS400Initialize extends AbstractConnector {
                 if (null != as400ConnectionPool) {
                     log.auditLog("Getting an AS400 connection from pool name : " + poolName);
                     as400 = as400ConnectionPool.getConnection(systemName, userID, password);
+                    if (log.isTraceOrDebugEnabled()) {
+                        log.traceOrDebug("Connection Pool - Active Connections : " +
+                                                    as400ConnectionPool.getActiveConnectionCount(systemName, userID));
+                        log.traceOrDebug("Connection Pool - Available Connections : " +
+                                                as400ConnectionPool.getAvailableConnectionCount(systemName, userID));
+                    }
                 } else {
                     throw new AS400PCMLConnectorException("Unable to find an AS400 connection pool mapped to name  '" +
                                                                                                     poolName + "'.");

@@ -111,6 +111,7 @@ public class AS400Trace extends AbstractConnector {
                 log.traceOrDebug("Log level Information : " + Trace.isTraceInformationOn());
                 log.traceOrDebug("Log level PCML : " + Trace.isTracePCMLOn());
                 log.traceOrDebug("Log level Warning : " + Trace.isTraceWarningOn());
+                log.traceOrDebug("Log level Proxy : " + Trace.isTraceProxyOn());
             }
         } catch(IOException ioException) {
             // Error occurred when setting logging file path.
