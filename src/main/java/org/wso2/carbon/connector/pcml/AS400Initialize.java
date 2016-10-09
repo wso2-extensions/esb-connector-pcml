@@ -148,15 +148,12 @@ public class AS400Initialize extends AbstractConnector {
         try {
             Object poolNameParameter = getParameter(messageContext, AS400Constants.AS400_CONNECTION_POOL_NAME);
             if (null != poolNameParameter) {
-
                 // Pool name taken from synapse.
                 String poolName = (String) poolNameParameter;
-
                 as400ConnectionPool = as400ConnectionPoolMap.get(poolName);
 
                 // Creating new pool if a pool does not exists with the given pool name.
                 if (null == as400ConnectionPool) {
-
                     as400ConnectionPool = new AS400ConnectionPool();
 
                     // Setting properties to the pool.

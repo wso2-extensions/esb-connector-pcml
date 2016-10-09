@@ -28,6 +28,7 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseConstants;
 import org.apache.synapse.SynapseLog;
@@ -47,6 +48,11 @@ import java.util.List;
  * A connector component that calls an AS400 program using PCML.
  */
 public class AS400CallProgram extends AbstractConnector {
+
+    /**
+     * Input stream for the PCML file retrieved from registry.
+     */
+    private InputStream pcmlFileContent = null;
 
     /**
      * {@inheritDoc}
@@ -88,14 +94,10 @@ public class AS400CallProgram extends AbstractConnector {
             // Create program document by getting the PCML file from registry.
             WSO2Registry registry = (WSO2Registry) messageContext.getConfiguration().getRegistry();
             Resource pcmlFileResource =  registry.getResource(pcmlFileLocation);
-            InputStream pcmlFileContent = pcmlFileResource.getContentStream();
+            pcmlFileContent = pcmlFileResource.getContentStream();
 
             ProgramCallDocument pcmlDocument = new ProgramCallDocument(
-                    as400,
-                    FilenameUtils.getBaseName(pcmlFileLocation),
-                    pcmlFileContent,
-                    null,
-                    null,
+                    as400, FilenameUtils.getBaseName(pcmlFileLocation), pcmlFileContent, null, null,
                     getFileType(FilenameUtils.getExtension(pcmlFileLocation)));
 
             // Get input parameters to pass to the PCML document
@@ -192,6 +194,16 @@ public class AS400CallProgram extends AbstractConnector {
                     log.traceOrDebug("Disconnecting from all AS400 services.");
                 }
                 as400.disconnectAllServices();
+            }
+
+            try {
+                if (null != pcmlFileContent) {
+                    pcmlFileContent.close();
+                }
+            } catch (IOException exception) {
+                String errorMessage = "Error occurred while closing PCML file stream from registry: ";
+                AS400Utils.setExceptionToPayload(errorMessage, exception, "299", messageContext);
+                handleException(errorMessage + exception.getMessage(), exception, messageContext);
             }
         }
     }

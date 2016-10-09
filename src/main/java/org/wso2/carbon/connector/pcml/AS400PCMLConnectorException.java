@@ -43,5 +43,4 @@ public class AS400PCMLConnectorException extends Exception {
     public AS400PCMLConnectorException(String message) {
         super(message);
     }
-
 }
