@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="wso2.connector.pcml" xmlns:p="http://services.samples">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <p:add>
+            <p:request>
+                <p:value1>5</p:value1>
+                <p:value2>10</p:value2>
+            </p:request>
+        </p:add>
+    </soapenv:Body>
+</soapenv:Envelope>

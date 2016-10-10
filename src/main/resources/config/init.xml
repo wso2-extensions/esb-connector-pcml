@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<template name="init" onError="fault" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="systemName" description="The system name or hostname of the AS400 system."/>
+    <parameter name="userID" description="The user ID for the AS400 system"/>
+    <parameter name="password" description="The password for the AS400 system"/>
+    <!--Connection Pool Properties-->
+    <parameter name="pool.poolName" description="A name for AS400 connection pool."/>
+    <parameter name="pool.maxConnections" description="The maximum number of connections."/>
+    <parameter name="pool.maxInactivity"
+               description="The maximum time in milliseconds of inactivity before an available connection is closed. "/>
+    <parameter name="pool.maxLifetime" description="The maximum life in milliseconds for an available connection."/>
+    <parameter name="pool.maxUseCount"
+               description="The maximum number of times a connection can be used before it is replaced in the pool."/>
+    <parameter name="pool.maxUseTime"
+               description="The maximum time in milliseconds a connection can be in use before it is closed and returned to the pool."/>
+    <parameter name="pool.runMaintenance"
+               description="Indicates whether the maintenance thread is used to clean up expired connections."/>
+    <parameter name="pool.threadUsed"
+               description="Indicates whether threads are used for communicating with the host servers and for running maintenance. The default value is true."/>
+    <parameter name="pool.cleanupInterval"
+               description="The time interval in milliseconds for running the maintenance daemon. Default value is 300000 milliseconds."/>
+    <!--Socket Properties-->
+    <parameter name="socket.keepAlive"
+               description="Set value for SO_KEEPALIVE socket option. Value should be true or false."/>
+    <parameter name="socket.loginTimeout"
+               description="Value for logging in timeout when creating a new socket connection in milliseconds."/>
+    <parameter name="socket.receiveBufferSize" description="Value for SO_RCVBUF socket option in bytes."/>
+    <parameter name="socket.sendBufferSize" description="Value for SO_SNDBUF socket option in bytes."/>
+    <parameter name="socket.soLinger" description="Value for SO_LINGER socket option in seconds."/>
+    <parameter name="socket.soTimeout" description="Value for SO_TIMEOUT socket option in milliseconds."/>
+    <parameter name="socket.tcpNoDelay"
+               description="Value for TCP_NODELAY socket option. Value should be true or false."/>
+    <sequence>
+        <class name="org.wso2.carbon.connector.pcml.AS400Initialize"/>
+    </sequence>
+</template>
