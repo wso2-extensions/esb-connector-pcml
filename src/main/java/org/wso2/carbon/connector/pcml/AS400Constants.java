@@ -72,5 +72,5 @@ public class AS400Constants {
     public static final String AS400_RETURN_POOL_NAME = "pool.returnPoolName";
     // Default log file path.
     public static final String AS400_DEFAULT_LOG_PATH = CarbonUtils.getCarbonLogsPath() + File.separator +
-                                                                                            "pcml-connector-logs.log";
+                                                        "pcml-connector-logs.log";
 }

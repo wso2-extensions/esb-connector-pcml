@@ -35,13 +35,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Creates AS400 instance for PCML connector. Authenticates if user ID and password are provided.
- * <p>
- *     Allows to set socket properties for the AS400 connection.
- * </p>
- * <p>
- *     Supports AS400 connection pools as well.
- * </p>
+ * Creates AS400 instance for PCML connector. Authenticates if user ID and password are provided. <p> Allows to set
+ * socket properties for the AS400 connection. </p> <p> Supports AS400 connection pools as well. </p>
  */
 public class AS400Initialize extends AbstractConnector {
     /**
@@ -51,13 +46,10 @@ public class AS400Initialize extends AbstractConnector {
     private static Map<String, AS400ConnectionPool> as400ConnectionPoolMap = new ConcurrentHashMap<>();
 
     /**
-     * {@inheritDoc}
-     * <p>
-     *     Creates an AS400 instance and store it in the message context as {@link AS400Constants#AS400_INSTANCE}
-     *     property. Authentication occurs only when user ID and password are provided. AS400 connection pools can be
-     *     creating using a {@link AS400ConnectionPool} if they are defined in the synapse. Supports setting
-     *     {@link SocketProperties} for AS400 connections.
-     * </p>
+     * {@inheritDoc} <p> Creates an AS400 instance and store it in the message context as {@link
+     * AS400Constants#AS400_INSTANCE} property. Authentication occurs only when user ID and password are provided. AS400
+     * connection pools can be creating using a {@link AS400ConnectionPool} if they are defined in the synapse. Supports
+     * setting {@link SocketProperties} for AS400 connections. </p>
      */
     @Override
     public void connect(MessageContext messageContext) throws ConnectException {
@@ -157,57 +149,57 @@ public class AS400Initialize extends AbstractConnector {
                     as400ConnectionPool = new AS400ConnectionPool();
 
                     // Setting properties to the pool.
-                    Object maxConnectionsParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_MAX_CONNECTIONS);
+                    Object maxConnectionsParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_MAX_CONNECTIONS);
                     if (null != maxConnectionsParameter) {
                         String maxConnections = (String) maxConnectionsParameter;
                         as400ConnectionPool.setMaxConnections(Integer.parseInt(maxConnections));
                     }
 
-                    Object maxInactivityParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_MAX_INACTIVITY);
+                    Object maxInactivityParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_MAX_INACTIVITY);
                     if (null != maxInactivityParameter) {
                         String maxInactivity = (String) maxInactivityParameter;
                         as400ConnectionPool.setMaxInactivity(Long.parseLong(maxInactivity));
                     }
 
-                    Object maxLifetimeParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_MAX_LIFETIME);
+                    Object maxLifetimeParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_MAX_LIFETIME);
                     if (null != maxLifetimeParameter) {
                         String maxLifetime = (String) maxLifetimeParameter;
                         as400ConnectionPool.setMaxLifetime(Long.parseLong(maxLifetime));
                     }
 
-                    Object maxUseCountParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_MAX_USE_COUNT);
+                    Object maxUseCountParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_MAX_USE_COUNT);
                     if (null != maxUseCountParameter) {
                         String maxUseCount = (String) maxUseCountParameter;
                         as400ConnectionPool.setMaxUseCount(Integer.parseInt(maxUseCount));
                     }
 
-                    Object maxUseTimeParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_MAX_USE_TIME);
+                    Object maxUseTimeParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_MAX_USE_TIME);
                     if (null != maxUseTimeParameter) {
                         String maxUseTime = (String) maxUseTimeParameter;
                         as400ConnectionPool.setMaxUseTime(Long.parseLong(maxUseTime));
                     }
 
-                    Object runMaintenanceParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_RUN_MAINTENANCE);
+                    Object runMaintenanceParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_RUN_MAINTENANCE);
                     if (null != runMaintenanceParameter) {
                         String runMaintenance = (String) runMaintenanceParameter;
                         as400ConnectionPool.setRunMaintenance(Boolean.parseBoolean(runMaintenance));
                     }
 
-                    Object threadUsedParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_THREAD_USED);
+                    Object threadUsedParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_THREAD_USED);
                     if (null != threadUsedParameter) {
                         String threadUsed = (String) threadUsedParameter;
                         as400ConnectionPool.setThreadUsed(Boolean.parseBoolean(threadUsed));
                     }
 
-                    Object cleanupIntervalParameter = getParameter(messageContext,
-                            AS400Constants.AS400_CONNECTION_POOL_CLEANUP_INTERVAL);
+                    Object cleanupIntervalParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_CLEANUP_INTERVAL);
                     if (null != cleanupIntervalParameter) {
                         String cleanupInterval = (String) cleanupIntervalParameter;
                         as400ConnectionPool.setCleanupInterval(Long.parseLong(cleanupInterval));
@@ -230,7 +222,7 @@ public class AS400Initialize extends AbstractConnector {
                     // Logging for debugging.
                     if (log.isTraceOrDebugEnabled()) {
                         log.traceOrDebug("AS400 Connection pool already exists with name '" + poolName + "'. Hence " +
-                                                                                            "ignoring pool creation.");
+                                         "ignoring pool creation.");
                         debugLogPoolProperties(poolName, as400ConnectionPoolMap.get(poolName), log);
                     }
                 }
@@ -247,8 +239,8 @@ public class AS400Initialize extends AbstractConnector {
     /**
      * Creates socket properties of a given {@link SocketProperties} object according to synapse syntax.
      *
-     * @param messageContext   The message context.
-     * @param log              The logger object.
+     * @param messageContext The message context.
+     * @param log            The logger object.
      * @return The socket properties object.
      */
     private SocketProperties getSocketProperties(MessageContext messageContext, SynapseLog log) {
@@ -257,44 +249,44 @@ public class AS400Initialize extends AbstractConnector {
             // Sets keepalive value
             Object keepAlive = getParameter(messageContext, AS400Constants.AS400_SOCKET_PROPERTY_KEEP_ALIVE);
             if (null != keepAlive) {
-                socketProperties.setKeepAlive(Boolean.parseBoolean((String)keepAlive));
+                socketProperties.setKeepAlive(Boolean.parseBoolean((String) keepAlive));
             }
 
             // Sets login timeout
             Object loginTimeout = getParameter(messageContext, AS400Constants.AS400_SOCKET_PROPERTY_LOGIN_TIMEOUT);
             if (null != loginTimeout) {
-                socketProperties.setLoginTimeout(Integer.parseInt((String)loginTimeout));
+                socketProperties.setLoginTimeout(Integer.parseInt((String) loginTimeout));
             }
 
             // Sets receive buffer size
-            Object receiveBufferSize = getParameter(messageContext,
-                    AS400Constants.AS400_SOCKET_PROPERTY_RECEIVE_BUFFER_SIZE);
+            Object receiveBufferSize = getParameter(messageContext, AS400Constants
+                    .AS400_SOCKET_PROPERTY_RECEIVE_BUFFER_SIZE);
             if (null != receiveBufferSize) {
-                socketProperties.setReceiveBufferSize(Integer.parseInt((String)receiveBufferSize));
+                socketProperties.setReceiveBufferSize(Integer.parseInt((String) receiveBufferSize));
             }
 
             // Sets send buffer size
             Object sendBufferSize = getParameter(messageContext, AS400Constants.AS400_SOCKET_PROPERTY_SEND_BUFFER_SIZE);
             if (null != sendBufferSize) {
-                socketProperties.setSendBufferSize(Integer.parseInt((String)sendBufferSize));
+                socketProperties.setSendBufferSize(Integer.parseInt((String) sendBufferSize));
             }
 
             // Sets socket linger value
             Object socketLinger = getParameter(messageContext, AS400Constants.AS400_SOCKET_PROPERTY_SOCKET_LINGER);
             if (null != socketLinger) {
-                socketProperties.setSoLinger(Integer.parseInt((String)socketLinger));
+                socketProperties.setSoLinger(Integer.parseInt((String) socketLinger));
             }
 
             // Sets socket timeout value
             Object socketTimeout = getParameter(messageContext, AS400Constants.AS400_SOCKET_PROPERTY_SOCKET_TIMEOUT);
             if (null != socketTimeout) {
-                socketProperties.setSoTimeout(Integer.parseInt((String)socketTimeout));
+                socketProperties.setSoTimeout(Integer.parseInt((String) socketTimeout));
             }
 
             // Sets TCP no delay
             Object tcpNoDelay = getParameter(messageContext, AS400Constants.AS400_SOCKET_PROPERTY_TCP_NO_DELAY);
             if (null != tcpNoDelay) {
-                socketProperties.setTcpNoDelay(Boolean.parseBoolean((String)tcpNoDelay));
+                socketProperties.setTcpNoDelay(Boolean.parseBoolean((String) tcpNoDelay));
             }
 
             // Logging for debugging.

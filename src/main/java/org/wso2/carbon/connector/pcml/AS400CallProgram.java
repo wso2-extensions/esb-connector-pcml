@@ -24,11 +24,9 @@ import com.ibm.as400.access.ExtendedIllegalArgumentException;
 import com.ibm.as400.data.PcmlException;
 import com.ibm.as400.data.ProgramCallDocument;
 import com.ibm.as400.data.XmlException;
-import javax.xml.stream.XMLStreamException;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseConstants;
 import org.apache.synapse.SynapseLog;
@@ -43,6 +41,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * A connector component that calls an AS400 program using PCML.
@@ -50,34 +49,27 @@ import java.util.List;
 public class AS400CallProgram extends AbstractConnector {
 
     /**
-     * Input stream for the PCML file retrieved from registry.
-     */
-    private InputStream pcmlFileContent = null;
-
-    /**
-     * {@inheritDoc}
-     * <p>
-     *     Calls a program in the AS400 server using PCML. The input parameters are taken through the soap body of the
-     *     message context.
-     * </p>
+     * {@inheritDoc} <p> Calls a program in the AS400 server using PCML. The input parameters are taken through the soap
+     * body of the message context. </p>
      */
     @Override
     public void connect(MessageContext messageContext) throws ConnectException {
         SynapseLog log = getLog(messageContext);
         AS400 as400 = null;
+        InputStream pcmlFileContent = null;
         try {
             Object as400InstanceProperty = messageContext.getProperty(AS400Constants.AS400_INSTANCE);
             if (null != as400InstanceProperty) {
                 as400 = (AS400) as400InstanceProperty;
             } else {
                 throw new AS400PCMLConnectorException("Unable to find an AS400 instance to call program. Use the " +
-                        "'init' mediator to create an AS400 instance.");
+                                                      "'init' mediator to create an AS400 instance.");
             }
 
             Object pcmlFileLocationParameter = getParameter(messageContext, AS400Constants.AS400_PCML_FILE_LOCATION);
             if (null == pcmlFileLocationParameter) {
-                throw new AS400PCMLConnectorException("A PCML file name could not be found as a parameter to call a " +
-                        "program. Make sure the registry path is correct.");
+                throw new AS400PCMLConnectorException("A PCML file name could not be found as a parameter to call a "
+                                                      + "program. Make sure the registry path is correct.");
             }
 
             // Get PCML source file name
@@ -93,12 +85,12 @@ public class AS400CallProgram extends AbstractConnector {
 
             // Create program document by getting the PCML file from registry.
             WSO2Registry registry = (WSO2Registry) messageContext.getConfiguration().getRegistry();
-            Resource pcmlFileResource =  registry.getResource(pcmlFileLocation);
+            Resource pcmlFileResource = registry.getResource(pcmlFileLocation);
             pcmlFileContent = pcmlFileResource.getContentStream();
 
-            ProgramCallDocument pcmlDocument = new ProgramCallDocument(
-                    as400, FilenameUtils.getBaseName(pcmlFileLocation), pcmlFileContent, null, null,
-                    getFileType(FilenameUtils.getExtension(pcmlFileLocation)));
+            ProgramCallDocument pcmlDocument = new ProgramCallDocument(as400, FilenameUtils.getBaseName
+                    (pcmlFileLocation), pcmlFileContent, null, null, getFileType(FilenameUtils.getExtension
+                    (pcmlFileLocation)));
 
             // Get input parameters to pass to the PCML document
             List<PCMLInputParam> inputParams = AS400Utils.getInputParameters(messageContext, log);
@@ -108,8 +100,8 @@ public class AS400CallProgram extends AbstractConnector {
                     if (null == inputParam.getIndices()) {
                         pcmlDocument.setValue(inputParam.getQualifiedName(), inputParam.getValue());
                     } else {
-                        pcmlDocument.setValue(inputParam.getQualifiedName(), inputParam.getIndices(),
-                                                                                                inputParam.getValue());
+                        pcmlDocument.setValue(inputParam.getQualifiedName(), inputParam.getIndices(), inputParam
+                                .getValue());
                     }
                 }
             }
@@ -122,19 +114,19 @@ public class AS400CallProgram extends AbstractConnector {
 
                 AS400Message[] messages = pcmlDocument.getMessageList(programName);
 
-                OMElement as400MessagesElement =
-                                        AS400Utils.OM_FACTORY.createOMElement("as400Messages", AS400Utils.OM_NAMESPACE);
+                OMElement as400MessagesElement = AS400Utils.OM_FACTORY.createOMElement("as400Messages", AS400Utils
+                        .OM_NAMESPACE);
 
                 for (AS400Message message : messages) {
                     OMElement messageIDElement = AS400Utils.OM_FACTORY.createOMElement("id", AS400Utils.OM_NAMESPACE);
                     messageIDElement.setText(message.getID());
 
-                    OMElement messageContentElement =
-                                            AS400Utils.OM_FACTORY.createOMElement("message", AS400Utils.OM_NAMESPACE);
+                    OMElement messageContentElement = AS400Utils.OM_FACTORY.createOMElement("message", AS400Utils
+                            .OM_NAMESPACE);
                     messageContentElement.setText(message.getText());
 
-                    OMElement as400MessageElement =
-                                        AS400Utils.OM_FACTORY.createOMElement("as400Message", AS400Utils.OM_NAMESPACE);
+                    OMElement as400MessageElement = AS400Utils.OM_FACTORY.createOMElement("as400Message", AS400Utils
+                            .OM_NAMESPACE);
                     as400MessageElement.addChild(messageIDElement);
                     as400MessageElement.addChild(messageContentElement);
 
@@ -144,7 +136,7 @@ public class AS400CallProgram extends AbstractConnector {
                 // Adding AS400 messages content to soap body and considering it as an exception.
                 AS400Utils.preparePayload(messageContext, as400MessagesElement);
                 messageContext.setProperty(SynapseConstants.ERROR_MESSAGE, "Calling program '" + programName +
-                        "' was not successful.");
+                                                                           "' was not successful.");
                 messageContext.setProperty(SynapseConstants.ERROR_CODE, "206");
                 messageContext.setProperty(SynapseConstants.ERROR_DETAIL, Arrays.toString(messages));
                 handleException("Calling program '" + programName + "' was not successful.", messageContext);
@@ -154,8 +146,8 @@ public class AS400CallProgram extends AbstractConnector {
                 // ByteArrayOutputStream are note required to be closed.
                 ByteArrayOutputStream xpcmlOutputStream = new ByteArrayOutputStream();
                 pcmlDocument.generateXPCML(programName, xpcmlOutputStream);
-                OMElement omElement = AXIOMUtil.stringToOM(xpcmlOutputStream.toString(
-                        StandardCharsets.UTF_8.toString()));
+                OMElement omElement = AXIOMUtil.stringToOM(xpcmlOutputStream.toString(StandardCharsets.UTF_8.toString
+                        ()));
 
                 // Adding output content to soap body
                 AS400Utils.preparePayload(messageContext, omElement);
@@ -209,13 +201,9 @@ public class AS400CallProgram extends AbstractConnector {
     }
 
     /**
-     * Gets the PCML source file type using file extension. Serialized PCML files are not supported.
-     * <p>
-     *     Extensions with "pcml" or "pcmlsrc" are considered as PCML documents.
-     * </p>
-     * <p>
-     *     Extensions with "xpcml" or "xpcmlsrc" are considered as XPCML documents.
-     * </p>
+     * Gets the PCML source file type using file extension. Serialized PCML files are not supported. <p> Extensions with
+     * "pcml" or "pcmlsrc" are considered as PCML documents. </p> <p> Extensions with "xpcml" or "xpcmlsrc" are
+     * considered as XPCML documents. </p>
      *
      * @param extension The extension.
      * @return The PCML source file type.
@@ -231,6 +219,6 @@ public class AS400CallProgram extends AbstractConnector {
         }
 
         throw new AS400PCMLConnectorException("Unsupported extension found for program calling. Following extensions " +
-                "are supported : pcml, pcmlsrc, xpcml, xpcmlsrc.");
+                                              "" + "are supported : pcml, pcmlsrc, xpcml, xpcmlsrc.");
     }
 }

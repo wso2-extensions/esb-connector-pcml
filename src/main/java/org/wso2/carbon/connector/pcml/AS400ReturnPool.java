@@ -33,10 +33,7 @@ import java.util.Map;
 public class AS400ReturnPool extends AbstractConnector {
 
     /**
-     * {@inheritDoc}
-     * <p>
-     *     Returns the AS400 connection back into the connection pool.
-     * </p>
+     * {@inheritDoc} <p> Returns the AS400 connection back into the connection pool. </p>
      */
     @Override
     public void connect(MessageContext messageContext) throws ConnectException {
@@ -46,22 +43,22 @@ public class AS400ReturnPool extends AbstractConnector {
             if (null != poolNameParameter) {
                 // Pool name taken from synapse.
                 String poolName = (String) poolNameParameter;
-                    Map<String, AS400ConnectionPool> connectionPoolMap = AS400Initialize.getAS400ConnectionPoolMap();
-                    AS400ConnectionPool as400ConnectionPool = connectionPoolMap.get(poolName);
-                    if (null != as400ConnectionPool) {
-                        Object as400InstanceProperty = messageContext.getProperty(AS400Constants.AS400_INSTANCE);
-                        if (null != as400InstanceProperty) {
-                            log.auditLog("Returning AS400 connection to connection pool : " + poolName);
-                            as400ConnectionPool.removeFromPool((AS400) as400InstanceProperty);
-                        } else {
-                            // An AS400 instance could not be found in the mediation flow to be returned to the pool.
-                            log.auditWarn("Unable to find an AS400 instance in the mediation flow. Make sure that an " +
-                                    "AS400 instance was created earlier using 'init'.");
-                        }
+                Map<String, AS400ConnectionPool> connectionPoolMap = AS400Initialize.getAS400ConnectionPoolMap();
+                AS400ConnectionPool as400ConnectionPool = connectionPoolMap.get(poolName);
+                if (null != as400ConnectionPool) {
+                    Object as400InstanceProperty = messageContext.getProperty(AS400Constants.AS400_INSTANCE);
+                    if (null != as400InstanceProperty) {
+                        log.auditLog("Returning AS400 connection to connection pool : " + poolName);
+                        as400ConnectionPool.removeFromPool((AS400) as400InstanceProperty);
                     } else {
-                        // Unable to find a connection pool with the given name.
-                        log.auditWarn("Unable to find a connection pool with the given pool name : " + poolName);
+                        // An AS400 instance could not be found in the mediation flow to be returned to the pool.
+                        log.auditWarn("Unable to find an AS400 instance in the mediation flow. Make sure that an " +
+                                      "AS400 instance was created earlier using 'init'.");
                     }
+                } else {
+                    // Unable to find a connection pool with the given name.
+                    log.auditWarn("Unable to find a connection pool with the given pool name : " + poolName);
+                }
             } else {
                 // Throwing an error when pool name does not exists.
                 throw new AS400PCMLConnectorException("Unable to find pool name to return the as400 instance.");

@@ -32,10 +32,7 @@ import java.io.IOException;
 public class AS400Trace extends AbstractConnector {
 
     /**
-     * {@inheritDoc}
-     * <p>
-     *     Updated different levels of logs in AS400 server communication.
-     * </p>
+     * {@inheritDoc} <p> Updated different levels of logs in AS400 server communication. </p>
      */
     @Override
     public void connect(MessageContext messageContext) throws ConnectException {
@@ -50,32 +47,32 @@ public class AS400Trace extends AbstractConnector {
 
             Object conversionLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_CONVERSION);
             if (null != conversionLevel) {
-                Trace.setTraceConversionOn(Boolean.parseBoolean((String)conversionLevel));
+                Trace.setTraceConversionOn(Boolean.parseBoolean((String) conversionLevel));
             }
 
             Object datastreamLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_DATASTREAM);
             if (null != datastreamLevel) {
-                Trace.setTraceDatastreamOn(Boolean.parseBoolean((String)datastreamLevel));
+                Trace.setTraceDatastreamOn(Boolean.parseBoolean((String) datastreamLevel));
             }
 
             Object diagnosticsLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_DIAGNOSTICS);
             if (null != diagnosticsLevel) {
-                Trace.setTraceDiagnosticOn(Boolean.parseBoolean((String)diagnosticsLevel));
+                Trace.setTraceDiagnosticOn(Boolean.parseBoolean((String) diagnosticsLevel));
             }
 
             Object errorLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_ERROR);
             if (null != errorLevel) {
-                Trace.setTraceErrorOn(Boolean.parseBoolean((String)errorLevel));
+                Trace.setTraceErrorOn(Boolean.parseBoolean((String) errorLevel));
             }
 
             Object informationLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_INFORMATION);
             if (null != informationLevel) {
-                Trace.setTraceInformationOn(Boolean.parseBoolean((String)informationLevel));
+                Trace.setTraceInformationOn(Boolean.parseBoolean((String) informationLevel));
             }
 
             Object pcmlLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_PCML);
             if (null != pcmlLevel) {
-                Trace.setTracePCMLOn(Boolean.parseBoolean((String)pcmlLevel));
+                Trace.setTracePCMLOn(Boolean.parseBoolean((String) pcmlLevel));
             }
 
             Object warningLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_WARNING);
@@ -90,13 +87,13 @@ public class AS400Trace extends AbstractConnector {
 
             Object allLevel = getParameter(messageContext, AS400Constants.AS400_TRACE_ALL);
             if (null != allLevel) {
-                Trace.setTraceConversionOn(Boolean.parseBoolean((String)allLevel));
-                Trace.setTraceDatastreamOn(Boolean.parseBoolean((String)allLevel));
-                Trace.setTraceDiagnosticOn(Boolean.parseBoolean((String)allLevel));
-                Trace.setTraceErrorOn(Boolean.parseBoolean((String)allLevel));
-                Trace.setTraceInformationOn(Boolean.parseBoolean((String)allLevel));
-                Trace.setTracePCMLOn(Boolean.parseBoolean((String)allLevel));
-                Trace.setTraceWarningOn(Boolean.parseBoolean((String)allLevel));
+                Trace.setTraceConversionOn(Boolean.parseBoolean((String) allLevel));
+                Trace.setTraceDatastreamOn(Boolean.parseBoolean((String) allLevel));
+                Trace.setTraceDiagnosticOn(Boolean.parseBoolean((String) allLevel));
+                Trace.setTraceErrorOn(Boolean.parseBoolean((String) allLevel));
+                Trace.setTraceInformationOn(Boolean.parseBoolean((String) allLevel));
+                Trace.setTracePCMLOn(Boolean.parseBoolean((String) allLevel));
+                Trace.setTraceWarningOn(Boolean.parseBoolean((String) allLevel));
                 Trace.setTraceProxyOn(Boolean.parseBoolean((String) allLevel));
             }
 
@@ -111,7 +108,7 @@ public class AS400Trace extends AbstractConnector {
                 log.traceOrDebug("Log level Warning : " + Trace.isTraceWarningOn());
                 log.traceOrDebug("Log level Proxy : " + Trace.isTraceProxyOn());
             }
-        } catch(IOException ioException) {
+        } catch (IOException ioException) {
             String errorMessage = "Error occurred when setting logging file path: ";
             AS400Utils.setExceptionToPayload(errorMessage, ioException, "400", messageContext);
             handleException(errorMessage + ioException.getMessage(), ioException, messageContext);

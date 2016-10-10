@@ -20,6 +20,7 @@ package org.wso2.carbon.connector.pcml;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
+
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -47,7 +48,7 @@ public class AS400Utils {
      * Gets the input parameters from the soap body and converts them to a list of {@link PCMLInputParam}s.
      *
      * @param messageContext The message context.
-     * @param log    The logger object for logging.
+     * @param log            The logger object for logging.
      * @return A list of {@link PCMLInputParam}.
      */
     public static List<PCMLInputParam> getInputParameters(MessageContext messageContext, SynapseLog log) throws
@@ -64,8 +65,8 @@ public class AS400Utils {
                         OMElement pcmlObject = (OMElement) pcmlObjects.next();
                         if (AS400Constants.AS400_PCML_PROGRAM_INPUT.equals(pcmlObject.getLocalName())) {
                             // qualifiedName is a required attribute.
-                            String qualifiedName = pcmlObject.getAttributeValue(
-                                                    new QName(AS400Constants.AS400_PCML_PROGRAM_INPUT_QUALIFIED_NAME));
+                            String qualifiedName = pcmlObject.getAttributeValue(new QName(AS400Constants
+                                    .AS400_PCML_PROGRAM_INPUT_QUALIFIED_NAME));
                             if (null == qualifiedName || qualifiedName.trim().isEmpty()) {
                                 log.auditWarn("'" + AS400Constants.AS400_PCML_PROGRAM_INPUT_QUALIFIED_NAME + "' " +
                                               "attribute not found for a " + AS400Constants.AS400_PCML_PROGRAM_INPUT +
@@ -73,8 +74,8 @@ public class AS400Utils {
                                 continue;
                             }
                             // indices is not a required attribute.
-                            int[] indices = getIndices(pcmlObject.getAttributeValue(
-                                                    new QName(AS400Constants.AS400_PCML_PROGRAM_INPUT_INDICES)), log);
+                            int[] indices = getIndices(pcmlObject.getAttributeValue(new QName(AS400Constants
+                                    .AS400_PCML_PROGRAM_INPUT_INDICES)), log);
                             String value = pcmlObject.getText();
                             inputParameters.add(new PCMLInputParam(qualifiedName, indices, value));
                         } else {
@@ -120,7 +121,7 @@ public class AS400Utils {
             }
         } catch (NumberFormatException e) {
             logger.auditWarn("Invalid content found for indices. Make sure that indices attribute consists of " +
-                                                    "integers separated by commas. Found '" + indicesAsString + "'.");
+                             "integers separated by commas. Found '" + indicesAsString + "'.");
             indices = null;
         }
 
@@ -148,7 +149,7 @@ public class AS400Utils {
     /**
      * Preparing payload for an exception.
      *
-     * @param messageContext The message context.
+     * @param messageContext   The message context.
      * @param exceptionMessage The exception message.
      */
     public static void preparePayload(MessageContext messageContext, String exceptionMessage) {
