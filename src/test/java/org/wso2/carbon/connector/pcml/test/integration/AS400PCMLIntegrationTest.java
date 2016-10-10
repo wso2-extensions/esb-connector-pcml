@@ -36,7 +36,7 @@ public class AS400PCMLIntegrationTest extends ConnectorIntegrationTestBase {
      */
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init("pcml-connector-1.0.0");
+        init("pcml-connector-1.0.1-SNAPSHOT");
     }
 
     /**
