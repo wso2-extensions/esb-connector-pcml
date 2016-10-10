@@ -144,6 +144,12 @@
             <version>${jt400.version}</version>
         </dependency>
     </dependencies>
+    <scm>
+        <connection>scm:git:https://github.com/wso2-extensions/esb-connector-pcml.git</connection>
+        <url>https://github.com/wso2-extensions/esb-connector-pcml.git</url>
+        <developerConnection>scm:git:https://github.com/wso2-extensions/esb-connector-pcml</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
     <build>
         <plugins>
             <plugin>
