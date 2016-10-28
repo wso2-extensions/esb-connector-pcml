@@ -78,6 +78,8 @@ public class AS400Initialize extends AbstractConnector {
             AS400ConnectionPool connectionPool = this.getConnectionPool(messageContext, log);
             // If connection pool exist.
             if (null != connectionPool) {
+                connectionPool.setSocketProperties(this.getSocketProperties(messageContext, log));
+
                 log.auditLog("Getting an AS400 connection from connection pool.");
 
                 // Getting the connection from pool.

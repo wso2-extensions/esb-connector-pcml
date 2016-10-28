@@ -97,6 +97,8 @@ public class AS400Trace extends AbstractConnector {
                 Trace.setTraceProxyOn(Boolean.parseBoolean((String) allLevel));
             }
 
+            Trace.setTraceOn(true);
+
             // Logging for debugging.
             if (log.isTraceOrDebugEnabled()) {
                 log.traceOrDebug("Log level Conversion : " + Trace.isTraceConversionOn());
