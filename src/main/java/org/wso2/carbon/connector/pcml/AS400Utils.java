@@ -80,7 +80,6 @@ public class AS400Utils {
                             String value;
                             if (pcmlObject.getFirstElement() != null) { // checking whether value is a xml body or not
                                 value = pcmlObject.getFirstElement().toString();
-
                             } else {
                                 value = pcmlObject.getText();
                             }
