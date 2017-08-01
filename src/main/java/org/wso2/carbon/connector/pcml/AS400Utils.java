@@ -76,7 +76,14 @@ public class AS400Utils {
                             // indices is not a required attribute.
                             int[] indices = getIndices(pcmlObject.getAttributeValue(new QName(AS400Constants
                                     .AS400_PCML_PROGRAM_INPUT_INDICES)), log);
-                            String value = pcmlObject.getText();
+                            //Fix for the https://wso2.org/jira/browse/ESBCONNECT-216
+                            String value;
+                            if (pcmlObject.getFirstElement() != null) { // checking whether value is a xml body or not
+                                value = pcmlObject.getFirstElement().toString();
+
+                            } else {
+                                value = pcmlObject.getText();
+                            }
                             inputParameters.add(new PCMLInputParam(qualifiedName, indices, value));
                         } else {
                             log.auditWarn("Invalid element found when parsing children of '" +
