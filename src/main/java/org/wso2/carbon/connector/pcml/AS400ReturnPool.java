@@ -49,7 +49,7 @@ public class AS400ReturnPool extends AbstractConnector {
                     Object as400InstanceProperty = messageContext.getProperty(AS400Constants.AS400_INSTANCE);
                     if (null != as400InstanceProperty) {
                         log.auditLog("Returning AS400 connection to connection pool : " + poolName);
-                        as400ConnectionPool.removeFromPool((AS400) as400InstanceProperty);
+                        as400ConnectionPool.returnConnectionToPool((AS400) as400InstanceProperty);
                     } else {
                         // An AS400 instance could not be found in the mediation flow to be returned to the pool.
                         log.auditWarn("Unable to find an AS400 instance in the mediation flow. Make sure that an " +

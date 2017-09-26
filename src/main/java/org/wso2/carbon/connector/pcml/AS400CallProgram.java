@@ -181,13 +181,6 @@ public class AS400CallProgram extends AbstractConnector {
             AS400Utils.setExceptionToPayload(errorMessage, exception, "299", messageContext);
             handleException(errorMessage + exception.getMessage(), exception, messageContext);
         } finally {
-            if (null != as400 && as400.isConnected()) {
-                if (log.isTraceOrDebugEnabled()) {
-                    log.traceOrDebug("Disconnecting from all AS400 services.");
-                }
-                as400.disconnectAllServices();
-            }
-
             try {
                 if (null != pcmlFileContent) {
                     pcmlFileContent.close();
