@@ -42,6 +42,7 @@
         <integration.base.version>1.0.1</integration.base.version>
         <jt400.version>9.1</jt400.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <powermock.version>1.6.5</powermock.version>
     </properties>
 
     <dependencies>
@@ -143,6 +144,18 @@
             <artifactId>jt400</artifactId>
             <version>${jt400.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-testng</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <scm>
         <connection>scm:git:https://github.com/wso2-extensions/esb-connector-pcml.git</connection>
@@ -229,8 +242,9 @@
                 <configuration>
                     <!-- <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m -Xdebug
                        -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006 </argLine> -->
-                    <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>
+                    <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>-->
                     <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>${surefireArgLine} -ea -Xmx512m</argLine>
                     <disableXmlReport>false</disableXmlReport>
                     <parallel>false</parallel>
                     <suiteXmlFiles>
@@ -271,6 +285,34 @@
                     </systemProperties>
                     <workingDirectory>${basedir}/target</workingDirectory>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.9</version>
+                <executions>
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <destFile>${basedir}/target/coverage-reports/jacoco.exec</destFile>
+                            <propertyName>surefireArgLine</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jacoco-site</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>${basedir}/target/coverage-reports/jacoco.exec</dataFile>
+                            <outputDirectory>${basedir}/target/coverage-reports/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>

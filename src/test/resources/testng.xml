@@ -30,4 +30,10 @@
             <class name="org.wso2.carbon.connector.pcml.test.integration.AS400PCMLIntegrationTest"/>
         </classes>
     </test>
+    <test name="AS400-PCML-Connector-Unit-Test" preserve-order="true" verbose="9">
+        <classes>
+            <class name="org.wso2.carbon.connector.pcml.test.unit.AS400InitializeUnitTest"/>
+            <class name="org.wso2.carbon.connector.pcml.test.unit.AS400CallProgramUnitTest"/>
+        </classes>
+    </test>
 </suite>
