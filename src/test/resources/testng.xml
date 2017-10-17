@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <!--
- ~  Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ ~  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  ~
  ~  WSO2 Inc. licenses this file to you under the Apache License,
  ~  Version 2.0 (the "License"); you may not use this file except
@@ -28,6 +28,14 @@
     <test name="AS400-PCML-Connector-Integration-Test" preserve-order="true" verbose="9">
         <classes>
             <class name="org.wso2.carbon.connector.pcml.test.integration.AS400PCMLIntegrationTest"/>
+        </classes>
+    </test>
+    <test name="AS400-PCML-Connector-Unit-Test" preserve-order="true" verbose="9">
+        <classes>
+            <class name="org.wso2.carbon.connector.pcml.test.unit.AS400InitializeUnitTest"/>
+            <class name="org.wso2.carbon.connector.pcml.test.unit.AS400CallProgramUnitTest"/>
+            <class name="org.wso2.carbon.connector.pcml.test.unit.AS400UtilsUnitTest"/>
+            <class name="org.wso2.carbon.connector.pcml.test.unit.AS400TraceUnitTest"/>
         </classes>
     </test>
 </suite>
