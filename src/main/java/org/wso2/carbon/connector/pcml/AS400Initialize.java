@@ -207,6 +207,13 @@ public class AS400Initialize extends AbstractConnector {
                         as400ConnectionPool.setCleanupInterval(Long.parseLong(cleanupInterval));
                     }
 
+                    Object pretestConnectionsParameter = getParameter(messageContext, AS400Constants
+                            .AS400_CONNECTION_POOL_PRETEST_CONNECTIONS);
+                    if (null != pretestConnectionsParameter) {
+                        String pretestConnections = (String) pretestConnectionsParameter;
+                        as400ConnectionPool.setPretestConnections(Boolean.parseBoolean(pretestConnections));
+                    }
+
                     // Logging for debugging.
                     if (log.isTraceOrDebugEnabled()) {
                         debugLogPoolProperties(poolName, as400ConnectionPool, log);
