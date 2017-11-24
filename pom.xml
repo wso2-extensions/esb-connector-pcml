@@ -39,10 +39,11 @@
         <json.version>2.0.0.wso2v1</json.version>
         <carbon.integration.framework>4.0.0</carbon.integration.framework>
         <org.testng.version>6.1.1</org.testng.version>
-        <integration.base.version>1.0.1</integration.base.version>
+        <integration.base.version>1.0.2</integration.base.version>
         <jt400.version>9.1</jt400.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <powermock.version>1.6.5</powermock.version>
+        <skip-tests>true</skip-tests>
     </properties>
     <dependencies>
         <dependency>
@@ -254,6 +255,7 @@
                     <!-- <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=512m -Xdebug
                        -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006 </argLine> -->
                     <!--<argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=128m</argLine>-->
+                    <skipTests>${skip-tests}</skipTests>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>${surefireArgLine} -ea -Xmx512m</argLine>
                     <disableXmlReport>false</disableXmlReport>
