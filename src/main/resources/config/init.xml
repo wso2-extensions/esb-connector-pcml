@@ -36,6 +36,8 @@
                description="Indicates whether threads are used for communicating with the host servers and for running maintenance. The default value is true."/>
     <parameter name="pool.cleanupInterval"
                description="The time interval in milliseconds for running the maintenance daemon. Default value is 300000 milliseconds."/>
+    <parameter name="pool.pretestConnections"
+               description="Sets whether connections are pretested before they are allocated to requesters. Value should be true or false."/>
     <!--Socket Properties-->
     <parameter name="socket.keepAlive"
                description="Set value for SO_KEEPALIVE socket option. Value should be true or false."/>

@@ -58,6 +58,7 @@ public class AS400Constants {
     public static final String AS400_CONNECTION_POOL_RUN_MAINTENANCE = "pool.runMaintenance";
     public static final String AS400_CONNECTION_POOL_THREAD_USED = "pool.threadUsed";
     public static final String AS400_CONNECTION_POOL_CLEANUP_INTERVAL = "pool.cleanupInterval";
+    public static final String AS400_CONNECTION_POOL_PRETEST_CONNECTIONS ="pool.pretestConnections" ;
     // Parameters for AS400 tracing.
     public static final String AS400_TRACE_CONVERSION = "conversion";
     public static final String AS400_TRACE_DATASTREAM = "datastream";
