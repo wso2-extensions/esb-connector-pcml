@@ -79,8 +79,7 @@ public class AS400TraceUnitTest {
         functionStack.push(templateContext);
         messageContext.setProperty("_SYNAPSE_FUNCTION_STACK", functionStack);
         as400Trace.connect(messageContext);
-        Assert.assertEquals(Trace.getFileName(),
-                "/home/jananithangavel/Desktop/new_unitTest/esb-connector-pcml/target/repository/logs/pcml-connector-logs.log");
+        Assert.assertNotNull(Trace.getFileName());
         Assert.assertFalse(Trace.isTraceAllOn());
     }
 
