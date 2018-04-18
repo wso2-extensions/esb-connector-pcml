@@ -36,7 +36,9 @@ public class AS400PCMLIntegrationTest extends ConnectorIntegrationTestBase {
      */
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
-        init("pcml-connector-1.0.4-SNAPSHOT");
+        String connectorName = System.getProperty("connector_name") + "-connector-" +
+                System.getProperty("connector_version") + ".zip";
+        init(connectorName);
     }
 
     /**
