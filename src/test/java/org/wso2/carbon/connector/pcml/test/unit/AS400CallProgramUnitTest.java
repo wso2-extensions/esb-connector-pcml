@@ -151,14 +151,6 @@ public class AS400CallProgramUnitTest {
         }
     }
 
-    @Test(description = "Test AS400 Call Program getFileType")
-    public void testGetFileType() throws Exception {
-        Assert.assertEquals(Whitebox.invokeMethod(as400CallProgram, "getFileType", "pcml"), 1);
-        Assert.assertEquals(Whitebox.invokeMethod(as400CallProgram, "getFileType", "pcmlsrc"), 1);
-        Assert.assertEquals(Whitebox.invokeMethod(as400CallProgram, "getFileType", "xpcml"), 2);
-        Assert.assertEquals(Whitebox.invokeMethod(as400CallProgram, "getFileType", "xpcmlsrc"), 2);
-    }
-
     @Test(description = "Test AS400 Call Program getFileType with Unsupport extension",
           expectedExceptions = AS400PCMLConnectorException.class)
     public void testGetFileTypeWithUnSupportExtension() throws Exception {
