@@ -30,23 +30,23 @@
         <axis2.osgi.version.range>1.7.1</axis2.osgi.version.range>
         <axiom.osgi.version.range>1.2.5</axiom.osgi.version.range>
         <connector.name>pcml</connector.name>
-        <product.ei.version>6.2.0</product.ei.version>
-        <carbon.kernel.version>4.4.17</carbon.kernel.version>
+        <product.ei.version>6.4.0</product.ei.version>
+        <carbon.kernel.version>4.4.36</carbon.kernel.version>
         <automation.framework.utils.version>4.4.2</automation.framework.utils.version>
         <automation.framework.version>4.4.3</automation.framework.version>
-        <emma.version>2.1.5320</emma.version>
-        <synapse.version>2.1.7-wso2v19</synapse.version>
-        <carbon.mediation.version>4.6.19</carbon.mediation.version>
-        <json.version>2.0.0.wso2v1</json.version>
+<!--         <emma.version>2.1.5320</emma.version> -->
+        <synapse.version>2.1.7-wso2v80</synapse.version>
+        <carbon.mediation.version>4.6.105</carbon.mediation.version>
+        <json.version>3.0.0.wso2v1</json.version>
         <org.testng.version>6.1.1</org.testng.version>
         <integration.base.version>1.0.2</integration.base.version>
         <jt400.version>9.1</jt400.version>
         <powermock.version>1.6.5</powermock.version>
         <skip-tests>true</skip-tests>
         <jets3t.version>0.9.4</jets3t.version>
-        <bouncycastle.version>1.55</bouncycastle.version>
-        <rampart.apache.version>1.6.1-wso2v18</rampart.apache.version>
-        <rampart.wso2.version>1.6.1.wso2v18</rampart.wso2.version>
+        <bouncycastle.version>1.52</bouncycastle.version>
+        <rampart.apache.version>1.6.1-wso2v26</rampart.apache.version>
+        <rampart.wso2.version>1.6.1-wso2v26</rampart.wso2.version>
     </properties>
     <dependencies>
         <dependency>
@@ -152,12 +152,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>emma</groupId>
-            <artifactId>emma</artifactId>
-            <version>${emma.version}</version>
-            <scope>test</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>emma</groupId> -->
+<!--             <artifactId>emma</artifactId> -->
+<!--             <version>${emma.version}</version> -->
+<!--             <scope>test</scope> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
