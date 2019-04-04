@@ -54,11 +54,10 @@ public class AS400Utils {
     public static List<PCMLInputParam> getInputParameters(MessageContext messageContext, SynapseLog log) throws
             AS400PCMLConnectorException {
         List<PCMLInputParam> inputParameters = new ArrayList<>();
-        try {
-            String strPCMLObjects = (String) ConnectorUtils.lookupTemplateParamater(messageContext, AS400Constants
+
+        	OMElement sObjects = (OMElement)ConnectorUtils.lookupTemplateParamater(messageContext, AS400Constants
                     .AS400_PCML_PROGRAM_INPUTS);
-            if (null != strPCMLObjects && !strPCMLObjects.isEmpty()) {
-                OMElement sObjects = AXIOMUtil.stringToOM(strPCMLObjects);
+
                 if (null != sObjects) {
                     Iterator pcmlObjects = sObjects.getChildElements();
                     while (pcmlObjects.hasNext()) {
@@ -96,10 +95,8 @@ public class AS400Utils {
                 } else if (log.isTraceOrDebugEnabled()) {
                     log.traceOrDebug("Input payload found but no input parameters found.");
                 }
-            }
-        } catch (XMLStreamException e) {
-            throw new AS400PCMLConnectorException("Unable to convert the input payload to an XML.", e);
-        }
+
+
 
         if (log.isTraceOrDebugEnabled()) {
             log.traceOrDebug("Input parameters found: " + inputParameters);
