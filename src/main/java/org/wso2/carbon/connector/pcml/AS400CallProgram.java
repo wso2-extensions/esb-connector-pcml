@@ -146,8 +146,8 @@ public class AS400CallProgram extends AbstractConnector {
                 // ByteArrayOutputStream are note required to be closed.
                 ByteArrayOutputStream xpcmlOutputStream = new ByteArrayOutputStream();
                 pcmlDocument.generateXPCML(programName, xpcmlOutputStream);
-                OMElement omElement = AXIOMUtil.stringToOM(xpcmlOutputStream.toString(StandardCharsets.UTF_8.toString
-                        ()));
+                OMElement omElement = AXIOMUtil.stringToOM(cleanText(xpcmlOutputStream.toString(
+                        StandardCharsets.UTF_8.toString())));
 
                 // Adding output content to soap body
                 AS400Utils.preparePayload(messageContext, omElement);
@@ -213,5 +213,24 @@ public class AS400CallProgram extends AbstractConnector {
 
         throw new AS400PCMLConnectorException("Unsupported extension found for program calling. Following extensions " +
                                               "" + "are supported : pcml, pcmlsrc, xpcml, xpcmlsrc.");
+    }
+
+    /**
+     * Removes all non-ASCII, ASCII control and non-printable characters from a string.
+     *
+     * @param text Text content.
+     * @return Cleaned text.
+     */
+    private String cleanText(String text) {
+        // Remove non-ASCII characters
+        text = text.replaceAll("[^\\x00-\\x7F]", "");
+
+        // Remove ASCII control characters
+        text = text.replaceAll("[\\p{Cntrl}&&[^\r\n\t]]", "");
+
+        // Remove non-printable characters from Unicode
+        text = text.replaceAll("\\p{C}", "");
+
+        return text.trim();
     }
 }
