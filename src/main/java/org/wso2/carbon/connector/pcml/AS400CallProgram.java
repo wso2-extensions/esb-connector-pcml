@@ -223,7 +223,7 @@ public class AS400CallProgram extends AbstractConnector {
      */
     private String cleanText(String text) {
         // Remove non-ASCII characters
-        text = text.replaceAll("[^\\x00-\\x7F]", "");
+        text = text.replaceAll("[^\\x00-\\xFF]", "");
 
         // Remove ASCII control characters
         text = text.replaceAll("[\\p{Cntrl}&&[^\r\n\t]]", "");
