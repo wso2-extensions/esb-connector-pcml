@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wso2.carbon.connector</groupId>
     <artifactId>org.wso2.carbon.connector.pcml</artifactId>
-    <version>1.0.6</version>
+    <version>2.0.0</version>
     <packaging>bundle</packaging>
     <name>WSO2 Carbon - PCML Connector For AS400</name>
     <url>http://wso2.org</url>
@@ -192,6 +192,11 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20080701</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.ei</groupId>
+            <artifactId>org.wso2.micro.integrator.registry</artifactId>
+            <version>4.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.ei</groupId>
