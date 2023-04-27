@@ -55,8 +55,10 @@ public class AS400Utils {
             AS400PCMLConnectorException {
         List<PCMLInputParam> inputParameters = new ArrayList<>();
         try {
-            String strPCMLObjects = (String) ConnectorUtils.lookupTemplateParamater(messageContext, AS400Constants
-                    .AS400_PCML_PROGRAM_INPUTS);
+            Object pcmlInputsObj = ConnectorUtils.lookupTemplateParamater(messageContext,
+                    AS400Constants.AS400_PCML_PROGRAM_INPUTS);
+            String strPCMLObjects = (pcmlInputsObj instanceof OMElement) ? pcmlInputsObj.toString() :
+                    (String) pcmlInputsObj;
             if (null != strPCMLObjects && !strPCMLObjects.isEmpty()) {
                 OMElement sObjects = AXIOMUtil.stringToOM(strPCMLObjects);
                 if (null != sObjects) {
