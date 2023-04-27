@@ -32,8 +32,8 @@ import org.apache.synapse.SynapseConstants;
 import org.apache.synapse.SynapseLog;
 import org.wso2.carbon.connector.core.AbstractConnector;
 import org.wso2.carbon.connector.core.ConnectException;
-import org.wso2.carbon.mediation.registry.WSO2Registry;
-import org.wso2.carbon.registry.core.Resource;
+import org.wso2.micro.integrator.registry.MicroIntegratorRegistry;
+import org.wso2.micro.integrator.registry.Resource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -84,7 +84,7 @@ public class AS400CallProgram extends AbstractConnector {
             String programName = (String) pcmlProgramNameParameter;
 
             // Create program document by getting the PCML file from registry.
-            WSO2Registry registry = (WSO2Registry) messageContext.getConfiguration().getRegistry();
+            MicroIntegratorRegistry registry = (MicroIntegratorRegistry) messageContext.getConfiguration().getRegistry();
             Resource pcmlFileResource = registry.getResource(pcmlFileLocation);
             pcmlFileContent = pcmlFileResource.getContentStream();
 
