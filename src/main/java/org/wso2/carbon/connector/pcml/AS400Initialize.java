@@ -18,12 +18,10 @@
 
 package org.wso2.carbon.connector.pcml;
 
-import com.ibm.as400.access.AS400;
-import com.ibm.as400.access.AS400ConnectionPool;
-import com.ibm.as400.access.AS400SecurityException;
-import com.ibm.as400.access.ConnectionPoolException;
-import com.ibm.as400.access.SocketProperties;
+import com.ibm.as400.access.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.pool2.BasePooledObjectFactory;
+import org.apache.commons.pool2.impl.*;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
 import org.wso2.carbon.connector.core.AbstractConnector;
@@ -33,6 +31,8 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import javax.management.*;
+import java.lang.management.ManagementFactory;
 
 /**
  * Creates AS400 instance for PCML connector. Authenticates if user ID and password are provided. <p> Allows to set
@@ -44,6 +44,7 @@ public class AS400Initialize extends AbstractConnector {
      * node. The connections are stored in the memory.
      */
     private static Map<String, AS400ConnectionPool> as400ConnectionPoolMap = new ConcurrentHashMap<>();
+    private Boolean isJmxEnabled = false;
 
     /**
      * {@inheritDoc} <p> Creates an AS400 instance and store it in the message context as {@link
@@ -102,7 +103,24 @@ public class AS400Initialize extends AbstractConnector {
                 as400.authenticate(userID, password);
                 log.auditLog("Authentication success...");
             }
+            String isJmxEnabled = (String) getParameter(messageContext, AS400Constants.AS400_JMX_ENABLED);
+            if (isJmxEnabled != null && !isJmxEnabled.isEmpty()) {
+                this.isJmxEnabled = Boolean.parseBoolean(isJmxEnabled);
+                if(this.isJmxEnabled) {
+                    try {
+                        ObjectName objectName = new ObjectName("org.wso2.carbon.connector.pcml:type=basic,name=as400");
+                        MBeanServer server = ManagementFactory.getPlatformMBeanServer();
+                        PCMLPoolMBean mbean = new PCMLPool(connectionPool);
+                        if(!server.isRegistered(objectName)) {
+                            server.registerMBean(mbean, objectName);
+                        }
+                    } catch (MalformedObjectNameException | InstanceAlreadyExistsException |
+                             MBeanRegistrationException | NotCompliantMBeanException e) {
+                        log.auditError("Error while adding AS400ConnectionPoll to MBeanServer.");
+                    }
 
+                }
+            }
         } catch (AS400SecurityException as400SecurityException) {
             String errorMessage = "Security or authorization error occurred: ";
             AS400Utils.setExceptionToPayload(errorMessage, as400SecurityException, "100", messageContext);
