@@ -74,4 +74,6 @@ public class AS400Constants {
     // Default log file path.
     public static final String AS400_DEFAULT_LOG_PATH = CarbonUtils.getCarbonLogsPath() + File.separator +
                                                         "pcml-connector-logs.log";
+    // Parameters for enabling JMX.
+    public static final String AS400_JMX_ENABLED = "jmxEnabled";
 }
