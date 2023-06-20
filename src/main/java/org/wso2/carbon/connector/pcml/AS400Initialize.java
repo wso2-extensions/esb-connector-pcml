@@ -18,7 +18,11 @@
 
 package org.wso2.carbon.connector.pcml;
 
-import com.ibm.as400.access.*;
+import com.ibm.as400.access.AS400;
+import com.ibm.as400.access.AS400ConnectionPool;
+import com.ibm.as400.access.AS400SecurityException;
+import com.ibm.as400.access.ConnectionPoolException;
+import com.ibm.as400.access.SocketProperties;
 import org.apache.commons.lang.StringUtils;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseLog;
@@ -29,7 +33,12 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import javax.management.*;
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
+import javax.management.MBeanServer;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.NotCompliantMBeanException;
 import java.lang.management.ManagementFactory;
 
 /**
