@@ -117,7 +117,7 @@ public class AS400Initialize extends AbstractConnector {
                     try {
                         ObjectName objectName = new ObjectName("org.wso2.carbon.connector.pcml:type=basic,name=as400");
                         MBeanServer server = ManagementFactory.getPlatformMBeanServer();
-                        PCMLPoolMBean mbean = new PCMLPool(connectionPool);
+                        PCMLPoolMBean mbean = new PCMLPool(connectionPool, as400);
                         if(!server.isRegistered(objectName)) {
                             server.registerMBean(mbean, objectName);
                         }

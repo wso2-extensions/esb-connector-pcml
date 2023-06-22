@@ -19,10 +19,12 @@
 package org.wso2.carbon.connector.pcml;
 
 import com.ibm.as400.access.AS400ConnectionPool;
+import com.ibm.as400.access.AS400;
 
 public class PCMLPool implements PCMLPoolMBean {
 
     AS400ConnectionPool as400ConnectionPool;
+    AS400 as400;
     int maxConnections;
     long maxInactivity;
     int maxLifetime;
@@ -32,10 +34,13 @@ public class PCMLPool implements PCMLPoolMBean {
     boolean isThreadUsed;
     int cleanupInterval;
     boolean pretestConnections;
+    int activeConnectionCount;
 
 
-    public PCMLPool(AS400ConnectionPool connectionPool) {
+    public PCMLPool(AS400ConnectionPool connectionPool, AS400 as400) {
+
         this.as400ConnectionPool = connectionPool;
+        this.as400 = as400;
     }
 
     @Override
@@ -77,6 +82,11 @@ public class PCMLPool implements PCMLPoolMBean {
 
     public boolean isPretestConnections() {
         return this.getAs400ConnectionPool().isPretestConnections();
+    }
+
+    @Override
+    public int getActiveConnectionCount() {
+        return this.getAs400ConnectionPool().getActiveConnectionCount(as400.getSystemName(), as400.getUserId());
     }
 
 }
