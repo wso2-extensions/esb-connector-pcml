@@ -30,5 +30,4 @@ public interface PCMLPoolMBean {
     long getCleanupInterval();
     boolean isPretestConnections();
     int getActiveConnectionCount();
-
 }

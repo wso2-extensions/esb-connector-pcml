@@ -36,9 +36,7 @@ public class PCMLPool implements PCMLPoolMBean {
     boolean pretestConnections;
     int activeConnectionCount;
 
-
     public PCMLPool(AS400ConnectionPool connectionPool, AS400 as400) {
-
         this.as400ConnectionPool = connectionPool;
         this.as400 = as400;
     }
@@ -49,44 +47,43 @@ public class PCMLPool implements PCMLPoolMBean {
     }
 
     public AS400ConnectionPool getAs400ConnectionPool() {
-        return as400ConnectionPool;
+        return this.as400ConnectionPool;
     }
 
     public long getMaxInactivity() {
-        return this.getAs400ConnectionPool().getMaxInactivity();
+        return this.as400ConnectionPool.getMaxInactivity();
     }
 
     public long getMaxLifetime() {
-        return this.getAs400ConnectionPool().getMaxLifetime();
+        return this.as400ConnectionPool.getMaxLifetime();
     }
 
     public int getMaxUseCount() {
-        return this.getAs400ConnectionPool().getMaxUseCount();
+        return this.as400ConnectionPool.getMaxUseCount();
     }
 
     public long getMaxUseTime() {
-        return this.getAs400ConnectionPool().getMaxUseTime();
+        return this.as400ConnectionPool.getMaxUseTime();
     }
 
     public boolean isRunMaintenance() {
-        return this.getAs400ConnectionPool().isRunMaintenance();
+        return this.as400ConnectionPool.isRunMaintenance();
     }
 
     public boolean isThreadUsed() {
-        return this.getAs400ConnectionPool().isThreadUsed();
+        return this.as400ConnectionPool.isThreadUsed();
     }
 
     public long getCleanupInterval() {
-        return this.getAs400ConnectionPool().getCleanupInterval();
+        return this.as400ConnectionPool.getCleanupInterval();
     }
 
     public boolean isPretestConnections() {
-        return this.getAs400ConnectionPool().isPretestConnections();
+        return this.as400ConnectionPool.isPretestConnections();
     }
 
     @Override
     public int getActiveConnectionCount() {
-        return this.getAs400ConnectionPool().getActiveConnectionCount(as400.getSystemName(), as400.getUserId());
+        return this.as400ConnectionPool.getActiveConnectionCount(as400.getSystemName(), as400.getUserId());
     }
-
 }
