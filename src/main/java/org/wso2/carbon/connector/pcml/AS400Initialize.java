@@ -33,6 +33,13 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import javax.management.MalformedObjectNameException;
+import javax.management.ObjectName;
+import javax.management.MBeanServer;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.NotCompliantMBeanException;
+import java.lang.management.ManagementFactory;
 
 /**
  * Creates AS400 instance for PCML connector. Authenticates if user ID and password are provided. <p> Allows to set
@@ -44,6 +51,7 @@ public class AS400Initialize extends AbstractConnector {
      * node. The connections are stored in the memory.
      */
     private static Map<String, AS400ConnectionPool> as400ConnectionPoolMap = new ConcurrentHashMap<>();
+    private Boolean isJmxEnabled = false;
 
     /**
      * {@inheritDoc} <p> Creates an AS400 instance and store it in the message context as {@link
@@ -102,7 +110,24 @@ public class AS400Initialize extends AbstractConnector {
                 as400.authenticate(userID, password);
                 log.auditLog("Authentication success...");
             }
+            String isJmxEnabled = (String) getParameter(messageContext, AS400Constants.AS400_JMX_ENABLED);
+            if (isJmxEnabled != null && !isJmxEnabled.isEmpty()) {
+                this.isJmxEnabled = Boolean.parseBoolean(isJmxEnabled);
+                if(this.isJmxEnabled) {
+                    try {
+                        ObjectName objectName = new ObjectName("org.wso2.carbon.connector.pcml:type=basic,name=as400");
+                        MBeanServer server = ManagementFactory.getPlatformMBeanServer();
+                        PCMLPoolMBean mbean = new PCMLPool(connectionPool, as400);
+                        if(!server.isRegistered(objectName)) {
+                            server.registerMBean(mbean, objectName);
+                        }
+                    } catch (MalformedObjectNameException | InstanceAlreadyExistsException |
+                             MBeanRegistrationException | NotCompliantMBeanException e) {
+                        log.auditError("Error while adding AS400ConnectionPoll to MBeanServer.");
+                    }
 
+                }
+            }
         } catch (AS400SecurityException as400SecurityException) {
             String errorMessage = "Security or authorization error occurred: ";
             AS400Utils.setExceptionToPayload(errorMessage, as400SecurityException, "100", messageContext);
