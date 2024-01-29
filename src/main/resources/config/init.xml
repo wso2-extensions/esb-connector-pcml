@@ -18,6 +18,7 @@
 -->
 <template name="init" onError="fault" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="systemName" description="The system name or hostname of the AS400 system."/>
+    <parameter name="jmxEnabled" description="jmx flag"/>
     <parameter name="userID" description="The user ID for the AS400 system"/>
     <parameter name="password" description="The password for the AS400 system"/>
     <!--Connection Pool Properties-->
