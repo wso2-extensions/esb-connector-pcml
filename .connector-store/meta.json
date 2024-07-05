@@ -10,7 +10,15 @@
     ],
     "releases": [
         {
-            "tagName": "v2.0.0",
+            "tagName": "org.wso2.carbon.connector.pcml-2.0.0",
+            "products": [
+                "MI 4.0.0",
+                "MI 4.1.0"
+            ],
+            "isHidden": false
+        },
+        {
+            "tagName": "org.wso2.carbon.connector.pcml-1.0.7",
             "products": [
                 "MI 4.0.0",
                 "MI 4.1.0"
