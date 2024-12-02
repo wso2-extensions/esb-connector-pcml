@@ -42,7 +42,7 @@
                     "isHidden":false
                 }
             ],
-            "connection": [],
+            "connections": [],
             "isHidden": false
         },
         {
@@ -73,7 +73,7 @@
                     "isHidden":false
                 }
             ],
-            "connection": [],
+            "connections": [],
             "isHidden": false
         }
     ]
