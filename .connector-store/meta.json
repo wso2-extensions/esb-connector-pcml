@@ -1,28 +1,79 @@
 {
     "name": "AS400 PCML",
     "owner": "WSO2",
+    "product": "MI",
     "category": "Developer Tools",
     "documentationUrl": "https://docs.wso2.com/display/ESBCONNECTORS/AS400+PCML+Connector",
+    "mavenGroupId": "org.wso2.carbon.connector",
+    "mavenArtifactId": "org.wso2.carbon.connector.pcml",
     "description": "The AS400 PCML connector allows you to access RPG programs that are available on AS400 (renamed as IBM iSeries) servers using WSO2 ESB. This is done using Program Call Markup Language (PCML). The AS400 is a mid-range server used by small businesses and departments in large enterprises and has been re-designed to work with web applications in a distributed network.",
     "status": "Active",
+    "connectorRank": 25,
+    "type": "Connector",
     "labels": [
         "IBM"
     ],
     "releases": [
         {
-            "tagName": "org.wso2.carbon.connector.pcml-2.0.0",
+            "tagName": "v2.0.0",
             "products": [
                 "MI 4.0.0",
                 "MI 4.1.0"
             ],
+            "operations": [
+                {
+                    "name":"init",
+                    "description":"Initializes AS400 instance. Authenticates if credentials are provided.",
+                    "isHidden":false
+                },
+                {
+                    "name":"call",
+                    "description":"Calls a program in the AS400 system.",
+                    "isHidden":false
+                },
+                {
+                    "name":"trace",
+                    "description":"Modify trace log levels.",
+                    "isHidden":false
+                },
+                {
+                    "name":"returnPool",
+                    "description":"Returns the AS400 connection to the connection pool.",
+                    "isHidden":false
+                }
+            ],
+            "connection": [],
             "isHidden": false
         },
         {
-            "tagName": "org.wso2.carbon.connector.pcml-1.0.7",
+            "tagName": "v1.0.7",
             "products": [
                 "MI 4.0.0",
                 "MI 4.1.0"
             ],
+            "operations": [
+                {
+                    "name":"init",
+                    "description":"Initializes AS400 instance. Authenticates if credentials are provided.",
+                    "isHidden":false
+                },
+                {
+                    "name":"call",
+                    "description":"Calls a program in the AS400 system.",
+                    "isHidden":false
+                },
+                {
+                    "name":"trace",
+                    "description":"Modify trace log levels.",
+                    "isHidden":false
+                },
+                {
+                    "name":"returnPool",
+                    "description":"Returns the AS400 connection to the connection pool.",
+                    "isHidden":false
+                }
+            ],
+            "connection": [],
             "isHidden": false
         }
     ]
