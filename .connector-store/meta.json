@@ -8,7 +8,7 @@
     "mavenArtifactId": "org.wso2.carbon.connector.pcml",
     "description": "The AS400 PCML connector allows you to access RPG programs that are available on AS400 (renamed as IBM iSeries) servers using WSO2 ESB. This is done using Program Call Markup Language (PCML). The AS400 is a mid-range server used by small businesses and departments in large enterprises and has been re-designed to work with web applications in a distributed network.",
     "status": "Active",
-    "connectorRank": 25,
+    "rank": 25,
     "type": "Connector",
     "labels": [
         "IBM"
@@ -42,7 +42,12 @@
                     "isHidden":false
                 }
             ],
-            "connections": [],
+            "connections": [
+                {
+                    "name": "pcml",
+                    "description": "Connection for PCML file operations."
+                }
+            ],
             "isHidden": false
         },
         {
@@ -73,7 +78,12 @@
                     "isHidden":false
                 }
             ],
-            "connections": [],
+            "connections": [
+                {
+                    "name": "pcml",
+                    "description": "Connection for PCML file operations."
+                }
+            ],
             "isHidden": false
         }
     ]
