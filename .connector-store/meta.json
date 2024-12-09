@@ -1,10 +1,15 @@
 {
     "name": "AS400 PCML",
     "owner": "WSO2",
+    "product": "MI",
     "category": "Developer Tools",
     "documentationUrl": "https://docs.wso2.com/display/ESBCONNECTORS/AS400+PCML+Connector",
+    "mavenGroupId": "org.wso2.integration.connector",
+    "mavenArtifactId": "mi-connector-pcml",
     "description": "The AS400 PCML connector allows you to access RPG programs that are available on AS400 (renamed as IBM iSeries) servers using WSO2 ESB. This is done using Program Call Markup Language (PCML). The AS400 is a mid-range server used by small businesses and departments in large enterprises and has been re-designed to work with web applications in a distributed network.",
     "status": "Active",
+    "rank": 25,
+    "type": "Connector",
     "labels": [
         "IBM"
     ],
@@ -15,6 +20,34 @@
                 "MI 4.0.0",
                 "MI 4.1.0"
             ],
+            "operations": [
+                {
+                    "name":"init",
+                    "description":"Initializes AS400 instance. Authenticates if credentials are provided.",
+                    "isHidden":false
+                },
+                {
+                    "name":"call",
+                    "description":"Calls a program in the AS400 system.",
+                    "isHidden":false
+                },
+                {
+                    "name":"trace",
+                    "description":"Modify trace log levels.",
+                    "isHidden":false
+                },
+                {
+                    "name":"returnPool",
+                    "description":"Returns the AS400 connection to the connection pool.",
+                    "isHidden":false
+                }
+            ],
+            "connections": [
+                {
+                    "name": "pcml",
+                    "description": "Connection for PCML file operations."
+                }
+            ],
             "isHidden": false
         },
         {
@@ -23,6 +56,8 @@
                 "MI 4.0.0",
                 "MI 4.1.0"
             ],
+            "operations": [],
+            "connections": [],
             "isHidden": false
         }
     ]
