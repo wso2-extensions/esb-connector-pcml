@@ -15,6 +15,42 @@
     ],
     "releases": [
         {
+            "tagName": "v2.0.1",
+            "products": [
+                "MI 4.0.0",
+                "MI 4.1.0"
+            ],
+            "operations": [
+                {
+                    "name":"init",
+                    "description":"Initializes AS400 instance. Authenticates if credentials are provided.",
+                    "isHidden":false
+                },
+                {
+                    "name":"call",
+                    "description":"Calls a program in the AS400 system.",
+                    "isHidden":false
+                },
+                {
+                    "name":"trace",
+                    "description":"Modify trace log levels.",
+                    "isHidden":false
+                },
+                {
+                    "name":"returnPool",
+                    "description":"Returns the AS400 connection to the connection pool.",
+                    "isHidden":false
+                }
+            ],
+            "connections": [
+                {
+                    "name": "pcml",
+                    "description": "Connection for PCML file operations."
+                }
+            ],
+            "isHidden": false
+        },
+        {
             "tagName": "org.wso2.carbon.connector.pcml-2.0.0",
             "products": [
                 "MI 4.0.0",
