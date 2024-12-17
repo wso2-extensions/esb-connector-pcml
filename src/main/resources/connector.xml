@@ -21,5 +21,6 @@
         <dependency component="config"/>
         <description>PCML Connector for AS400</description>
     </component>
+    <displayName>AS400 PCML</displayName>
     <icon>icon/icon-small.gif</icon>
 </connector>
