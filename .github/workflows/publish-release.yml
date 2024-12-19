@@ -30,7 +30,7 @@ jobs:
           echo "<settings>
                   <servers>
                     <server>
-                      <id>nexus-releases</id>
+                      <id>releases</id>
                       <username>${{ secrets.NEXUS_USERNAME }}</username>
                       <password>${{ secrets.NEXUS_PASSWORD }}</password>
                     </server>
@@ -47,7 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.WSO2_INTEGRATION_BOT_TOKEN }}
         run: |
-          mvn --batch-mode release:prepare release:perform -Dtag=${{ env.VERSION_TAG }}
+          mvn --batch-mode release:prepare release:perform -Dtag=${{ env.VERSION_TAG }} -Darguments="-Dmaven.javadoc.skip=true"
       - name: Create Github Release with Assets
         env:
           GITHUB_TOKEN: ${{ secrets.WSO2_INTEGRATION_BOT_TOKEN }}
