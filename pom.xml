@@ -243,6 +243,8 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <tagNameFormat>@{project.version}</tagNameFormat>
+                    <attachSources>false</attachSources>  <!-- Disable source JAR generation -->
+                    <attachJavadocs>false</attachJavadocs> 
                 </configuration>
             </plugin>
             <plugin>
