@@ -243,9 +243,20 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <tagNameFormat>@{project.version}</tagNameFormat>
-                    <attachSources>false</attachSources>  <!-- Disable source JAR generation -->
-                    <attachJavadocs>false</attachJavadocs> 
                 </configuration>
+                <properties>
+                   <release>skip</release>
+                </properties>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-source-plugin</artifactId>
+               <executions>
+                   <execution>
+                       <id>default</id>
+                       <phase>none</phase> <!-- Prevents default execution -->
+                   </execution>
+               </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
