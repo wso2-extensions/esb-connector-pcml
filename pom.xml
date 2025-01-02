@@ -443,7 +443,6 @@
                 <version>2.5.4</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <generateSources>false</generateSources>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
