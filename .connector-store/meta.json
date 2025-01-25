@@ -42,12 +42,7 @@
                     "isHidden":false
                 }
             ],
-            "connections": [
-                {
-                    "name": "pcml",
-                    "description": "Connection for PCML file operations."
-                }
-            ],
+            "connections": [],
             "isHidden": false
         },
         {
@@ -78,12 +73,7 @@
                     "isHidden":false
                 }
             ],
-            "connections": [
-                {
-                    "name": "pcml",
-                    "description": "Connection for PCML file operations."
-                }
-            ],
+            "connections": [],
             "isHidden": false
         },
         {
